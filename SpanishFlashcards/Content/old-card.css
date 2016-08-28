@@ -1,0 +1,63 @@
+﻿body {
+}
+
+.removed {
+    display: none;
+}
+
+#question {
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    background-color: #ccf;
+    text-align: center;
+    font-size: 20px;
+}
+
+#answerRow {
+    margin-top: 38px;
+}
+
+#answer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #cfc;
+    border-radius: 5px;
+}
+
+#showAnswer {
+    /*border: 1px solid transparent;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#body-nav {
+    margin-top: 38px;
+}
+
+#cardXofY {
+    margin-top: 38px;
+    text-align: center;
+}
+
+.card-nav-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #ffe870;
+}
+
+.card {
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.4) 3px 2px;
+}
+
+/*div {
+    border: 1px solid black;
+}*/

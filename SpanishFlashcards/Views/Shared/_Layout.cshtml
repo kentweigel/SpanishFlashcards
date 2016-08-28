@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+
+@{
+    ViewBag.Title = "Spanish Flashcards";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" /> @* This meta tag is necessary on some IE11 browsers for the linear gradient to work. Dev machine and web server both had IE11, but only dev machine worked without this meta tag. *@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kent Weigel" />
+    <title>@ViewBag.Title</title>
+    <base href="@Url.Content("~")" target="_blank" />
+    <link href="/KWLogo.ico" rel="shortcut icon" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/App.css" rel="stylesheet" />
+
+</head>
+<body data-ng-app="app" data-ng-controller="NavController as navCtrl">
+    <div class="titlebar navbar navbar-default navbar-static-top" role="navigation">
+        <div @*class="container"*@>
+            <div id="navbar-title" class="navbar-header">
+                <div id="navbar-brand">
+                    <a href="/">
+                        <div id="brand-name">
+                            Kent Weigel
+                        </div>
+                        <div id="brand-slogan">
+                            Never Stop Learning
+                        </div>
+                    </a>
+                </div>
+                <div id="navbar-title-text">@ViewBag.Title</div>
+                @*<div class="navbar-title-pad"></div>*@
+                <button id="hamburger" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul id="mainMenu" class="navbar-menu-left nav navbar-nav navbar-left">
+                    @*<li class="active">@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li class="active" data-ng-click="navCtrl.setCurrentPanel('Card')">Home</li>
+                    @*<li class="active">@Html.ActionLink("Admin", "Index", "Admin")</li>*@
+                    <li class="active" data-ng-click="navCtrl.setCurrentPanel('CardAdmin')">Admin</li>
+                    <li class="active" data-ng-click="navCtrl.setCurrentPanel('About')">About</li>
+                    <li class="active" data-ng-click="navCtrl.setCurrentPanel('Contact')">Contact</li>
+                </ul>
+                @*@Html.Partial("Infrastructure/_MainNav")*@
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+
+        <div id="footer-fix"></div>
+        <footer>
+            <hr />
+            <p>&copy; @DateTime.Now.Year - @ViewBag.Title</p>
+        </footer>
+    </div>
+
+    @Html.Hidden("baseUrl", Url.Content("~"))
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/AngularJS/card-data-factory.js")
+    @Scripts.Render("~/Scripts/AngularJS/nav-controller.js")
+    @Scripts.Render("~/Scripts/utility.js")
+    @*<script src="~/Scripts/utility.js"></script>*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

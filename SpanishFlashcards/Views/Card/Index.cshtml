@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Admin";
+    Layout = null;
+}
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="" data-ng-click="navCtrl.setCurrentPanel('Create')">Create</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Spanish)*@
+            Spanish
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.English)*@
+            English
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PartOfSpeech)*@
+            Part of Speech
+        </th>
+        <th></th>
+    </tr>
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Spanish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.English)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartOfSpeechRecord.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }*@
+
+    <tr data-ng-repeat="card in controller.cards">
+        <td>{{ card.Spanish }}</td>
+        <td>{{ card.English }}</td>
+        <td>{{ card.PartOfSpeech }}</td>
+        <td id="recordActionButtons">
+            <a title="Edit" class="btn btn-xs btn-success" href="" data-ng-click="navCtrl.setCurrentPanel('EditCard');controller.setCurrentCard($index)">
+                <i class="glyphicon glyphicon-pencil"></i>
+                <span class="sr-only">Edit</span>
+            </a>
+            @*<a title="Details" class="btn btn-xs btn-info" href="/Card/Details/card.Id">
+                <i class="glyphicon glyphicon-zoom-in"></i>
+                <span class="sr-only">Details</span>
+            </a>*@
+            <a title="Delete" class="btn btn-xs btn-danger" href="/Card/Delete/card.Id">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Delete</span>
+            </a>
+        </td>
+    </tr>
+
+</table>

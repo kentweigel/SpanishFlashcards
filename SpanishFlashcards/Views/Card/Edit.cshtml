@@ -1,0 +1,87 @@
+﻿@model SpanishFlashcards.ViewModels.CardViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <fieldset>
+            <legend>Card</legend>
+
+            <div class="row form-horizontal">
+                @Html.HiddenFor(model => model.Card.Id)
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Card.Spanish, htmlAttributes: new { @class = "control-label col-md-1" })
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Card.Spanish, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Card.Spanish, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Card.English, htmlAttributes: new { @class = "control-label col-md-1" })
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Card.English, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Card.English, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Card.PartOfSpeech, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.DropDownListFor(model => model.Card.PartOfSpeech, Model.PartOfSpeechSelectList, htmlAttributes: new { @class = "form-control text-box single-line" })
+                        @Html.ValidationMessageFor(model => model.Card.PartOfSpeech, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <p>
+            <input type="submit" value="Save" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }*@
+
+<form data-ng-submit="controller.updateCard();navCtrl.setCurrentPanel('CardAdmin')" novalidate>
+    <fieldset>
+        <legend>Card</legend>
+
+        <div class="row form-horizontal">
+            <div class="editor-label">
+                <label for="spanishTextbox" class="control-label col-md-1">Spanish:</label>
+            </div>
+            <div class="col-md-2">
+                <input id="spanishTextbox" type="text" class="form-control" data-ng-model="controller.currentCard.Spanish" />
+            </div>
+
+            <div class="editor-label">
+                <label for="englishTextbox" class="control-label col-md-1">English:</label>
+            </div>
+            <div class="col-md-2">
+                <input id="englishTextbox" type="text" class="form-control" data-ng-model="controller.currentCard.English" />
+            </div>
+
+            <div class="editor-label">
+                <label for="partOfSpeechTextbox" class="control-label col-md-2">Part of Speech:</label>
+            </div>
+            <div class="col-md-2">
+                @*<input id="partOfSpeechTextbox" type="text" class="form-control" data-ng-model="controller.cards[controller.currentIndex].PartOfSpeech" />*@
+                @*@Html.DropDownListFor(model => model.Card.PartOfSpeech, Model.PartOfSpeechSelectList, htmlAttributes: new { @class = "form-control text-box single-line" })*@
+                <select data-ng-options="part for part in controller.partsOfSpeech" data-ng-required="required" @* See note in controller about the grief this select caused. *@
+                        data-ng-model="controller.currentCard.PartOfSpeech" class="form-control text-box single-line"></select>
+            </div>
+        </div>
+    </fieldset>
+
+    <p>
+        <input type="submit" value="Save" /> | 
+        <a href="" data-ng-click="navCtrl.setCurrentPanel('CardAdmin')">Back to List</a>
+    </p>
+</form>

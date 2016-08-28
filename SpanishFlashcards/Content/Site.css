@@ -1,0 +1,269 @@
+﻿body {
+}
+
+address {
+    font-style: normal;
+}
+
+.titlebar {
+    width: auto;
+    background-color: darkblue;
+    /*background-image: linear-gradient(#006, #00a, #00c, #00e, #00e, #00e, #00c, #00b, #00a, #009, #007, #006);*/
+    background-image: linear-gradient(black, darkblue);
+    border-radius: 4px;
+    overflow: visible;
+    padding: 8px;
+    margin: 8px;
+    line-height: normal;
+    /* height: 6em; This is necessary to avoid overflow visible/auto conundrum with dropdown menus. */
+}
+
+.titlebar a:not(hover) {
+    text-decoration: none;
+    color: lightgray;
+}
+
+.titlebar a:hover {
+    color: white;
+}
+
+/*.navbar-menu {
+    clear: both;
+    text-align: left;
+}*/
+
+#mainMenu {
+    clear: both;
+    float: left;
+    margin: 8px 0 0 15px;
+    padding: 0;
+}
+
+#loginMenu {
+    margin-bottom: 0;
+}
+
+#loginMenu li {
+    display: inline-block;
+}
+
+#mainMenu li,
+#loginMenu .active {
+    line-height: 20px;
+    padding: 0 15px;
+}
+
+#mainMenu .active,
+#loginMenu .active {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent;
+    color: lightgray;
+}
+
+#mainMenu li:hover,
+#mainMenu li:focus,
+#loginMenu li:hover,
+#loginMenu li:focus {
+    color: #333;
+    cursor: pointer;
+}
+
+#mainMenu .active:hover,
+#mainMenu .active:focus,
+#loginMenu .active:hover,
+#loginMenu .active:focus {
+    color: black;
+    background-color: cornflowerblue;
+    border-radius: 2px;
+}
+
+#mainMenu .open {
+    color: white;
+}
+
+#mainMenu .open:hover,
+#mainMenu .open:focus {
+    color: yellow;
+    background-color: dodgerblue;
+}
+
+.dropdown-menu {
+    background-color: cornflowerblue;
+}
+
+.navbar-menu-right {
+    float: right;
+    margin: 8px 15px 0;
+    padding: 0;
+}
+
+.navbar-menu-right li {
+    display: inline;
+}
+
+#navbar-title {
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+    width: 100%;
+    /*border: 1px solid orange;*/
+}
+
+#navbar-title-text {
+    position: absolute;
+    /*display: inline-block;*/ /* This ruined the full-width of the title when uncommented. */
+    height: 100%;
+    width: 90%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: bold;
+    color: lightgray;
+    text-align: center;
+    /*vertical-align: middle;*/
+    /*border: 1px solid yellow;*/
+    z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+    #navbar-title-text {
+        /* Centering is great until the title text overlaps the brand text. This abandons centering at that point and makes the responsiveness respect the title text width. */
+        position: relative;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar-title-pad {
+        display: none;
+    }
+
+    #navbar-title-text {
+        float: right;
+        width: auto;
+    }
+}
+
+.navbar-title-pad {
+    overflow: hidden;
+}
+
+#navbar-brand {
+    display: inline-block;
+    margin: 0 0 0 30px;
+    padding: 0;
+    width: 150px;
+    min-width: 130px;
+    float: left;
+}
+
+#brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    width: auto;
+}
+
+#brand-slogan {
+    font-size: 13px;
+}
+
+#hamburger {
+    background-color: darkblue;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.body-link {
+    font-size: 20px;
+}
+
+.body-link:visited {
+    color: blue;
+}
+
+.body-link:not(visited) {
+    color: blue;
+}
+
+.body-link:hover {
+    text-decoration: underline;
+}
+
+.body-link:not(hover) {
+    text-decoration: none;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+#nav-links {
+    text-align: center;
+}
+
+    #nav-links ul {
+        list-style: none;
+    }
+
+    #nav-links li {
+        font-size: 30px;
+        margin-top: 8px;
+    }
+
+    #nav-links a:visited {
+        color: blue;
+    }
+
+    #nav-links a:not(visited) {
+        color: blue;
+    }
+
+    #nav-links a:hover {
+        text-decoration: underline;
+    }
+
+    #nav-links a:not(hover) {
+        text-decoration: none;
+    }
+
+.vert-spacer-5 { height: 5px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.vert-spacer-10 { height: 10px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.vert-spacer-15 { height: 15px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.vert-spacer-20 { height: 20px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+/* All the footer styles together fix the footer at the bottom, make it opaque,
+    and make it so the scrollbar can scroll all the way to the bottom. */
+#footer-fix {
+    height: 4em;
+}
+
+footer {
+    position: fixed;
+    display: block;
+    width: 100%;
+    background: white;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+}
+
+    footer hr {
+        margin: 4px;
+    }
+
+    footer p {
+        margin: 4px;
+    }

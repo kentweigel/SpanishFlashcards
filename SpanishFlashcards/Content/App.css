@@ -1,0 +1,106 @@
+﻿body {
+}
+
+.removed {
+    display: none;
+}
+
+#card {
+    position: relative;
+    height: 21em;
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.4) 3px 2px;
+    padding: 1%;
+}
+
+/*#questionOrAnswer {
+    position: absolute;
+    width: 98%;
+    top: 1.7em;
+    bottom: 1.3em;
+    border: 1px solid red;
+    overflow-y: auto;
+}*/
+
+#cardTextWrapper {
+    position: relative;
+    height: 18em;
+    overflow-y: hidden;
+}
+
+.cardText {
+    position: absolute;
+    top: 50%;
+    width: 99%;
+    max-height: 100%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    /*margin-top: -.5em;*/
+    /*line-height: 1em;*/
+    font-size: 8rem;
+    /*border: 1px solid blue;*/
+    text-align: center;
+    word-break: break-word;
+    word-wrap: break-word;
+    line-height: 1em;
+}
+
+@media screen and (max-width: 1199px) {
+    .cardText {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 299px) {
+    .cardText {
+        font-size: 3rem;
+    }
+}
+
+#questionLabel, #answerLabel {
+    height: 1.2em;
+}
+
+#partOfSpeech {
+    position: absolute;
+    bottom: 0px;
+}
+
+#card-nav {
+    padding: 20px;
+    text-align: center;
+}
+
+#card-nav button {
+    font-size: 20px;
+    width: 100px;
+    border-radius: 3px;
+}
+
+#cardInstructions {
+    margin-top: -20px;
+}
+
+fieldset {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    /*margin-left: 10px;*/
+    margin-bottom: 8px;
+    padding: 0 10px 10px 10px;
+}
+
+legend {
+    width: auto;
+    padding: 0 10px;
+    margin-left: 10px;
+    margin-bottom: 1px;
+    border-bottom: none;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+[ng-cloak] {
+    display: none !important;   /* This keeps the mustaches ({{ and }}) from displaying for AngularJS fields */
+}
