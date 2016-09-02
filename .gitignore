@@ -22,6 +22,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 
+# Browser tab icon
+KWLogo.ico
+
 # .config files
 Web*.config
 App.Config
