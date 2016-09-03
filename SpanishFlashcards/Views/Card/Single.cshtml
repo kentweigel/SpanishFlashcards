@@ -9,67 +9,67 @@
         <fieldset>
             <legend>Direction</legend>
             <div>
-                <input type="radio" name="direction" data-ng-value="true" data-ng-model="controller.spanishToEnglish" /> Spanish to English
+                <input type="radio" name="direction" data-ng-value="true" data-ng-model="ctrl.spanishToEnglish" /> Spanish to English
             </div>
             <div>
-                <input type="radio" name="direction" data-ng-value="false" data-ng-model="controller.spanishToEnglish" /> English to Spanish
+                <input type="radio" name="direction" data-ng-value="false" data-ng-model="ctrl.spanishToEnglish" /> English to Spanish
             </div>
         </fieldset>
         <fieldset>
             <legend>Options</legend>
             @*<div>
-                <input type="checkbox" id="requireSpecialCharactersCheckbox" /> Require Special Characters
-            </div>*@
+                    <input type="checkbox" id="requireSpecialCharactersCheckbox" /> Require Special Characters
+                </div>*@
             <div>
-                <input type="checkbox" id="showStatisticsCheckbox" data-ng-model="controller.showStatistics" /> Show Statistics (and Answers)
+                <input type="checkbox" id="showStatisticsCheckbox" data-ng-model="ctrl.showStatistics" /> Show Statistics (and Answers)
             </div>
             <div>
-                <input type="checkbox" id="allowHintsCheckbox" data-ng-model="controller.allowHints" /> Allow Hints
+                <input type="checkbox" id="allowHintsCheckbox" data-ng-model="ctrl.allowHints" /> Allow Hints
             </div>
         </fieldset>
         <fieldset>
             <legend>Parts of Speech</legend>
             <div>
-                <input type="checkbox" id="includeNounsCheckbox" data-ng-model="controller.includeNouns" data-ng-change="controller.filterChange()" /> Include Nouns
+                <input type="checkbox" id="includeNounsCheckbox" data-ng-model="ctrl.includeNouns" data-ng-change="ctrl.filterChange()" /> Include Nouns
             </div>
             <div>
-                <input type="checkbox" id="includeVerbsCheckbox" data-ng-model="controller.includeVerbs" data-ng-change="controller.filterChange()" /> Include Verbs
+                <input type="checkbox" id="includeVerbsCheckbox" data-ng-model="ctrl.includeVerbs" data-ng-change="ctrl.filterChange()" /> Include Verbs
             </div>
             <div>
-                <input type="checkbox" id="includeAdjectivesCheckbox" data-ng-model="controller.includeAdjectives" data-ng-change="controller.filterChange()" /> Include Adjectives
+                <input type="checkbox" id="includeAdjectivesCheckbox" data-ng-model="ctrl.includeAdjectives" data-ng-change="ctrl.filterChange()" /> Include Adjectives
             </div>
             <div>
-                <input type="checkbox" id="includeAdverbsCheckbox" data-ng-model="controller.includeAdverbs" data-ng-change="controller.filterChange()" /> Include Adverbs
+                <input type="checkbox" id="includeAdverbsCheckbox" data-ng-model="ctrl.includeAdverbs" data-ng-change="ctrl.filterChange()" /> Include Adverbs
             </div>
             <div>
-                <input type="checkbox" id="includePronounsCheckbox" data-ng-model="controller.includePronouns" data-ng-change="controller.filterChange()" /> Include Pronouns
+                <input type="checkbox" id="includePronounsCheckbox" data-ng-model="ctrl.includePronouns" data-ng-change="ctrl.filterChange()" /> Include Pronouns
             </div>
             <div>
-                <input type="checkbox" id="includePrepositionsCheckbox" data-ng-model="controller.includePrepositions" data-ng-change="controller.filterChange()" /> Include Prepositions
+                <input type="checkbox" id="includePrepositionsCheckbox" data-ng-model="ctrl.includePrepositions" data-ng-change="ctrl.filterChange()" /> Include Prepositions
             </div>
             <div>
-                <input type="checkbox" id="includeConjunctionsCheckbox" data-ng-model="controller.includeConjunctions" data-ng-change="controller.filterChange()" /> Include Conjunctions
+                <input type="checkbox" id="includeConjunctionsCheckbox" data-ng-model="ctrl.includeConjunctions" data-ng-change="ctrl.filterChange()" /> Include Conjunctions
             </div>
         </fieldset>
-   </div>
+    </div>
 
     <div class="col-sm-5">
         <div class="row">
             <div id="card">
-                <div id="questionLabel" data-ng-show="controller.showingQuestion" data-ng-cloak="">Question:</div>
-                <div id="answerLabel" data-ng-show="!controller.showingQuestion" data-ng-cloak="">Answer:</div>
+                <div id="questionLabel" data-ng-show="ctrl.showingQuestion" data-ng-cloak="">Question:</div>
+                <div id="answerLabel" data-ng-show="!ctrl.showingQuestion" data-ng-cloak="">Answer:</div>
                 <div id="cardTextWrapper">
-                    <div id="cardQuestionText" class="cardText" data-ng-show="controller.spanishToEnglish ? controller.showingQuestion : !controller.showingQuestion" data-ng-cloak="">{{ controller.cards[controller.currentIndex].Spanish }}</div>
-                    <div id="cardAnswerText" class="cardText" data-ng-show="controller.spanishToEnglish ? !controller.showingQuestion : controller.showingQuestion" data-ng-cloak="">{{ controller.cards[controller.currentIndex].English }}</div>
+                    <div id="cardQuestionText" class="cardText" data-ng-show="ctrl.spanishToEnglish ? ctrl.showingQuestion : !ctrl.showingQuestion" data-ng-cloak="">{{ ctrl.cards[ctrl.currentIndex].Spanish }}</div>
+                    <div id="cardAnswerText" class="cardText" data-ng-show="ctrl.spanishToEnglish ? !ctrl.showingQuestion : ctrl.showingQuestion" data-ng-cloak="">{{ ctrl.cards[ctrl.currentIndex].English }}</div>
                 </div>
-                <div id="partOfSpeech" data-ng-cloak="">Part of Speech: {{ controller.cards[controller.currentIndex].PartOfSpeech }}</div>
+                <div id="partOfSpeech" data-ng-cloak="">Part of Speech: {{ ctrl.cards[ctrl.currentIndex].PartOfSpeech }}</div>
             </div>
         </div>
         <div id="card-nav" class="row">
-            <button id="flipButton" class="btn" data-ng-click="controller.flipClick()" data-ng-show="controller.showingQuestion" data-ng-cloak="">Flip</button>
-            <button id="correctButton" class="btn" data-ng-click="controller.correctClick()" data-ng-show="!controller.showingQuestion" data-ng-cloak="">Correct</button>
-            <button id="hintButton" class="btn" data-ng-click="controller.hintClick()" data-ng-show="controller.showingQuestion" data-ng-disabled="!controller.allowHints" data-ng-cloak="">Hint</button>
-            <button id="incorrectButton" class="btn" data-ng-click="controller.incorrectClick()" data-ng-show="!controller.showingQuestion" data-ng-cloak="">Incorrect</button>
+            <button id="flipButton" class="btn" data-ng-click="ctrl.flipClick()" data-ng-show="ctrl.showingQuestion" data-ng-cloak="">Flip</button>
+            <button id="correctButton" class="btn" data-ng-click="ctrl.correctClick()" data-ng-show="!ctrl.showingQuestion" data-ng-cloak="">Correct</button>
+            <button id="hintButton" class="btn" data-ng-click="ctrl.hintClick()" data-ng-show="ctrl.showingQuestion" data-ng-disabled="!ctrl.allowHints" data-ng-cloak="">Hint</button>
+            <button id="incorrectButton" class="btn" data-ng-click="ctrl.incorrectClick()" data-ng-show="!ctrl.showingQuestion" data-ng-cloak="">Incorrect</button>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <table class="table" data-ng-show="controller.showStatistics" data-ng-cloak="">
+    <table class="table" data-ng-show="ctrl.showStatistics" data-ng-cloak="">
         <thead>
             <tr>
                 <th>ID</th>
@@ -102,7 +102,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="card in controller.cards track by $index">
+            <tr data-ng-repeat="card in ctrl.cards track by $index">
                 <th>{{ card.Id }}</th>
                 <th>{{ card.Spanish }}</th>
                 <th>{{ card.English }}</th>
@@ -110,8 +110,8 @@
                 <th>{{ card.CorrectCount }}</th>
                 <th>{{ card.TotalCount }}</th>
                 <th>{{ card.HintUsedCount }}</th>
-                @*<th>{{ Math.round(controller.getCardScore(card), -2) }}</th>*@
-                <th>{{ controller.getCardScore(card) | number:2 }}</th>
+                @*<th>{{ Math.round(ctrl.getCardScore(card), -2) }}</th>*@
+                <th>{{ ctrl.getCardScore(card) | number:2 }}</th>
             </tr>
         </tbody>
     </table>
@@ -119,6 +119,6 @@
 
 @section Scripts {
     @*@Scripts.Render("~/Scripts/angular.js")
-    @Scripts.Render("~/Scripts/AngularJS/card-data-factory.js")*@
-    @Scripts.Render("~/Scripts/AngularJS/card-controller.js")
+        @Scripts.Render("~/Scripts/app/card-data-factory.js")*@
+    @Scripts.Render("~/Scripts/app/card-ctrl.js")
 }

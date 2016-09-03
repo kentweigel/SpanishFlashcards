@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function iife() {
     angular.module('app')
         .directive('cardPanel', function () {
             return {
@@ -36,7 +36,7 @@
                 templateUrl: '/Account/Login'
             }
         })
-        .directive('cardAdminPanel', function () {
+        .directive('adminPanel', function () {
             return {
                 restrict: 'E',
                 templateUrl: '/Card/Index'

@@ -12,23 +12,23 @@ If correct, then just let the index advance to the next card, effectively puttin
 When wrapping in circular queue, decide whether to recalculate score. I lean toward yes. Currently that does not happen.
 */
 
-(function () {
+(function iife() {
     'use strict';
 
     angular.module('app')
         .controller('CardController', CardController);
-        // It worked having the directive here, but I hadn't done the same in the card-admin directive
-        // and yet it was still sharing this controller somehow. The references to card-panel and
-        // admin-panel are at the same level so I don't understand that. So I decided to explicitly 
-        // share the same card controller and do away with the admin controller.
-        //.directive('cardPanel', function () {
-        //    return {
-        //        restrict: 'E',
-        //        templateUrl: '/Card/Single',
-        //        controller: CardController,
-        //        controllerAs: 'controller'
-        //    }
-        //});
+    // It worked having the directive here, but I hadn't done the same in the card-admin directive
+    // and yet it was still sharing this controller somehow. The references to card-panel and
+    // admin-panel are at the same level so I don't understand that. So I decided to explicitly 
+    // share the same card controller and do away with the admin controller.
+    //.directive('cardPanel', function () {
+    //    return {
+    //        restrict: 'E',
+    //        templateUrl: '/Card/Single',
+    //        controller: CardController,
+    //        controllerAs: 'controller'
+    //    }
+    //});
 
     CardController.$inject = ['$filter', 'cardData'];
 
@@ -66,7 +66,7 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                     }
                 })
                 .catch(function (error) {
-                    alert('Call to CardController.getCards failed, status: ' + error.status + ' : ' + error.statusText);
+                    console.log('Call to CardController.getCards failed, status: ' + error.status + ' : ' + error.statusText);
                 });
         }
 
@@ -163,6 +163,6 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                     (card.PartOfSpeech === 'Pronoun' && vm.includePronouns) ||
                     (card.PartOfSpeech === 'Preposition' && vm.includePrepositions) ||
                     (card.PartOfSpeech === 'Conjunction' && vm.includeConjunctions);
-            }
+        }
     }
 })();
