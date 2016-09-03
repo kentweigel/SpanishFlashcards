@@ -31,6 +31,7 @@ namespace SpanishFlashcards.Controllers
         #region Methods
 
         //[ResponseType(typeof(List<Card>))]
+        //[Authorize]
         public async Task<IHttpActionResult> Get()
         {
             //Request.Abort();  // Use for testing failure condition in Javascript get()

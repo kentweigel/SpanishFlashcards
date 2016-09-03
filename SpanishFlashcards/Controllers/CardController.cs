@@ -54,16 +54,16 @@ namespace SpanishFlashcards.Controllers
         //
         // GET: /Card/Edit/5
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            //Card card = db.Card.Find(id);
-            //if (card == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            Card card = db.Card.Find(id);
+            if (card == null)
+            {
+                return HttpNotFound();
+            }
 
             var viewModel = new CardViewModel();
-            //viewModel.Card = card;
+            viewModel.Card = card;
             viewModel.PartOfSpeechSelectList = GetPartOfSpeechSelectList();
 
             return View(viewModel);

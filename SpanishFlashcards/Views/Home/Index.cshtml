@@ -6,7 +6,7 @@
     <div ng-view></div>
 </div>*@
 
-<div ng-controller="CardController as controller">
+@*<div ng-controller="CardController as controller">
     <card-panel class="panel" ng-show="navCtrl.isSelected('Card')"></card-panel>
     <about-panel class="panel" ng-show="navCtrl.isSelected('About')"></about-panel>
     <contact-panel class="panel" ng-show="navCtrl.isSelected('Contact')"></contact-panel>
@@ -15,18 +15,20 @@
     <login-panel class="panel" ng-show="navCtrl.isSelected('Login')"></login-panel>
 </div>
 
-<div ng-controller="CardAdminController as controller">
-    <card-admin-panel class="panel" ng-show="navCtrl.isSelected('CardAdmin')"></card-admin-panel>
+<div ng-controller="AdminController as controller">
+    <admin-panel class="panel" ng-show="navCtrl.isSelected('CardAdmin')"></card-admin-panel>
     <create-card-panel class="panel" ng-show="navCtrl.isSelected('CreateCard')"></create-card-panel>
     <edit-card-panel class="panel" ng-show="navCtrl.isSelected('EditCard')"></edit-card-panel>
     <delete-card-panel class="panel" ng-show="navCtrl.isSelected('DeleteCard')"></delete-card-panel>
-</div>
+</div>*@
+
+<div ui-view></div>
 
 @section Scripts {
     @*@Scripts.Render("~/Scripts/angular-route.js")*@
-    @*@Scripts.Render("~/Scripts/AngularJS/home-controller.js")*@
-    @*@Scripts.Render("~/Scripts/AngularJS/card-data-factory.js")*@
-    @Scripts.Render("~/Scripts/AngularJS/card-controller.js")
-    @Scripts.Render("~/Scripts/AngularJS/card-admin-controller.js")
-    @Scripts.Render("~/Scripts/AngularJS/app-directives.js")
+    @*@Scripts.Render("~/Scripts/app/home-controller.js")*@
+    @*@Scripts.Render("~/Scripts/app/card-data-factory.js")*@
+    @Scripts.Render("~/Scripts/app/card-controller.js")
+    @Scripts.Render("~/Scripts/app/admin-admin-controller.js")
+    @Scripts.Render("~/Scripts/app/app-directives.js")
 }

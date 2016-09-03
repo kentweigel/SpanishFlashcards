@@ -2,25 +2,25 @@
     'use strict';
 
     angular.module('cardData', [])
-        .factory('cardData', cardData);
+        .factory('cardData', CardData);
 
-    cardData.$inject = ['$http'];
+    CardData.$inject = ['$http', '$q'];
 
-    function cardData($http) {
-        var factory = this;
+    function CardData($http, $q) {
+        var service = this;
 
-        factory.cards = [];
-        factory.partsOfSpeech = [];
+        service.cards = [];
+        service.partsOfSpeech = [];
 
-        factory.getCards = function () {
-            if (factory.cards.length > 0) {
-                return factory.cards;
+        service.getCards = function () {
+            if (service.cards.length > 0) {
+                return $q.when(service.cards);
             }
             else {
-                return $http.get(factory.getBaseLocation() + 'Api/CardApi/', { params: { timeout: 300 } })
+                return $http.get(service.getBaseLocation() + 'Api/CardApi/', { params: { timeout: 300 } })
                     .then(function (data, status, headers, config) {
-                        factory.cards = data.data;
-                        return factory.cards;
+                        service.cards = data.data;
+                        return service.cards;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -29,15 +29,15 @@
             }
         }
 
-        factory.getPartsOfSpeech = function () {
-            if (factory.partsOfSpeech.length > 0) {
-                return factory.partsOfSpeech;
+        service.getPartsOfSpeech = function () {
+            if (service.partsOfSpeech.length > 0) {
+                return $q.when(service.partsOfSpeech);
             }
             else {
-                return $http.get(factory.getBaseLocation() + 'Api/PartOfSpeechApi/', { params: { timeout: 300 } })
+                return $http.get(service.getBaseLocation() + 'Api/PartOfSpeechApi/', { params: { timeout: 300 } })
                     .then(function (data, status, headers, config) {
-                        factory.partsOfSpeech = data.data;
-                        return factory.partsOfSpeech;
+                        service.partsOfSpeech = data.data;
+                        return service.partsOfSpeech;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -46,8 +46,8 @@
             }
         }
 
-        factory.postCard = function (card) {
-            return $http.post(factory.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
+        service.postCard = function (card) {
+            return $http.post(service.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
                     return data.data;   // The returned data is the new card Id field.
                 })
@@ -57,7 +57,7 @@
                 });
         }
 
-        factory.postHistory = function (cardId, correct, hintUsed) {
+        service.postHistory = function (cardId, correct, hintUsed) {
             var data = {
                 Id: null,
                 CardId: cardId,
@@ -66,7 +66,7 @@
                 HintUsed: hintUsed
             }
 
-            return $http.post(factory.getBaseLocation() + 'Api/HistoryApi/', data, { params: { timeout: 300 } })
+            return $http.post(service.getBaseLocation() + 'Api/HistoryApi/', data, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
                     return data.data;   // The returned data is the new history Id field, but we don't need it, since we only see aggregate history. (sums)
                 })
@@ -76,13 +76,13 @@
                 });
         }
 
-        factory.getBaseLocation = function () {
+        service.getBaseLocation = function () {
             var baseUrlElement = document.getElementById("baseUrl");
             var baseUrl = baseUrlElement.value;
 
             return baseUrl;
         }
 
-        return factory;
+        return service;
     }
 })();

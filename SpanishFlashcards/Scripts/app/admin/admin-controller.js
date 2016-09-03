@@ -1,10 +1,10 @@
-﻿(function () {
+﻿(function iife() {
     angular.module('app')
-        .controller('CardAdminController', CardAdminController);
+        .controller('AdminController', AdminController);
 
-    CardAdminController.$inject = ['cardData'];
+    AdminController.$inject = ['cardData'];
 
-    function CardAdminController(cardData) {
+    function AdminController(cardData) {
         var vm = this;
 
         vm.cards = [];
@@ -29,7 +29,7 @@
                     }
                 })
                 .catch(function (error) {
-                    alert('Call to CardAdminController.getCards failed, status: ' + error.status + ' : ' + error.statusText);
+                    alert('Call to AdminController.getCards failed, status: ' + error.status + ' : ' + error.statusText);
                 });
         }
 
@@ -47,7 +47,7 @@
                     vm.partsOfSpeech = result;
                 })
                 .catch(function (error) {
-                    alert('Call to CardAdminController.getPartsOfSpeech failed, status: ' + error.status + ' : ' + error.statusText);
+                    alert('Call to AdminController.getPartsOfSpeech failed, status: ' + error.status + ' : ' + error.statusText);
                 });
         }
 
