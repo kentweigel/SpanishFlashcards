@@ -12,7 +12,7 @@ If correct, then just let the index advance to the next card, effectively puttin
 When wrapping in circular queue, decide whether to recalculate score. I lean toward yes. Currently that does not happen.
 */
 
-(function iife() {
+(function () {
     'use strict';
 
     angular.module('app')
@@ -66,7 +66,7 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                     }
                 })
                 .catch(function (error) {
-                    console.log('Call to CardController.getCards failed, status: ' + error.status + ' : ' + error.statusText);
+                    alert('Call to CardController.getCards failed, status: ' + error.status + ' : ' + error.statusText);
                 });
         }
 
