@@ -1,10 +1,12 @@
 ﻿(function () {
+    'use strict';
+
     angular.module('app')
         .controller('CardAdminController', CardAdminController);
 
-    CardAdminController.$inject = ['cardData'];
+    CardAdminController.$inject = ['cardData', 'securityData'];
 
-    function CardAdminController(cardData) {
+    function CardAdminController(cardData, securityData) {
         var vm = this;
 
         vm.cards = [];
@@ -14,6 +16,7 @@
 
         getCards();
         getPartsOfSpeech();
+        $('.focus').focus();    // Give focus to selected control, since utility.js functions don't run on ui-router state change, only on document ready.
 
         function getCards() {
             cardData.getCards()
@@ -56,16 +59,45 @@
             //vm.selectedPartOfSpeech = vm.currentCard.PartOfSpeech;
         }
 
-        vm.addCard = function () {
-            // Finish this.
+        vm.saveNewCard = function () {
+            cardData.postCard(vm.cards[vm.currentIndex])
+                .then(function (result) {
+                    console.log('saveNewCard returned success.');
+                })
+                .catch(function (error) {
+                    console.log('saveNewCard returned failure.');
+                    alert('Unable to save new card on the server.');
+                });
         }
 
-        vm.updateCard = function () {
-            // Finish this.
+        vm.saveCurrentCard = function () {
+            cardData.putCard(vm.cards[vm.currentIndex])
+                .then(function (result) {
+                    console.log('saveCurrentCard returned success.');
+                })
+                .catch(function (error) {
+                    console.log('saveCurrentCard returned failure.');
+                    alert('Unable to save card changes on the server.');
+                });
         }
 
-        vm.deleteCard = function () {
-            // Finish this.
+        vm.deleteCurrentCard = function () {
+            cardData.postCard(vm.cards[vm.currentIndex])
+                .then(function (result) {
+                    console.log('deleteCurrentCard returned success.');
+                })
+                .catch(function (error) {
+                    console.log('deleteCurrentCard returned failure.');
+                    alert('Unable to delete card on the server.');
+                });
+        }
+
+        vm.login = function (form) {
+            // This is only here to test the theory that when not authorized for an MVC page
+            // it redirects to Login page and ui-router still uses the controller for the state
+            // that was linked to the unauthorized page. That is truly the case. Need to get
+            // MVC to return 403 rather than redirect, and then trap in ui-router resolve??
+            securityData.login(email, password, rememberMe);
         }
     }
-})();
+}());

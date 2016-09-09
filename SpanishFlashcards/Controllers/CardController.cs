@@ -6,18 +6,17 @@ using System.Web.Mvc;
 using SpanishFlashcards.EF.Models;
 using SpanishFlashcards.EF.Concrete;
 using SpanishFlashcards.ViewModels;
-using System.Collections.Generic;
 
 namespace SpanishFlashcards.Controllers
 {
-    [Authorize(Users = "kentpmac@aol.com")]
+    [AuthorizeOr403Attribute(Users = "kentpmac@aol.com")]
     public class CardController : Controller
     {
         private EfDbContext db = new EfDbContext();
 
         //
         // GET: /Card/
-
+        [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]  // This is necessary to keep user from accessing cached copy after logging out.
         public ActionResult Index()
         {
             //return View(db.Card.ToList());
@@ -26,7 +25,7 @@ namespace SpanishFlashcards.Controllers
 
         //
         // GET: /Card/Create
-
+        [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]  // This is necessary to keep user from accessing cached copy after logging out.
         public ActionResult Create()
         {
             CardViewModel viewModel = new CardViewModel();
@@ -53,7 +52,7 @@ namespace SpanishFlashcards.Controllers
 
         //
         // GET: /Card/Edit/5
-
+        [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]  // This is necessary to keep user from accessing cached copy after logging out.
         public ActionResult Edit()
         {
             //Card card = db.Card.Find(id);
@@ -89,7 +88,7 @@ namespace SpanishFlashcards.Controllers
 
         //
         // GET: /Card/Delete/5
-
+        [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]  // This is necessary to keep user from accessing cached copy after logging out.
         public ActionResult Delete(int id = 0)
         {
             Card card = db.Card.Find(id);

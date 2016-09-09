@@ -57,6 +57,28 @@
                 });
         }
 
+        service.putCard = function (card) {
+            return $http.put(service.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
+                .then(function (data, status, headers, config) {
+                    return data.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return error;
+                });
+        }
+
+        service.deleteCard = function (card) {
+            return $http.delete(service.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
+                .then(function (data, status, headers, config) {
+                    return data.data;   // The returned data is the new card Id field.
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return error;
+                });
+        }
+
         service.postHistory = function (cardId, correct, hintUsed) {
             var data = {
                 Id: null,
@@ -85,4 +107,4 @@
 
         return service;
     }
-})();
+}());

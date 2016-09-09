@@ -18,7 +18,7 @@
     <link href="~/Content/App.css" rel="stylesheet" />
 
 </head>
-<body data-ng-app="app">
+<body data-ng-app="app" data-ng-controller="SecurityController as securityCtrl">
     <div class="titlebar navbar navbar-default navbar-static-top" role="navigation">
         <div @*class="container"*@>
             <div id="navbar-title" class="navbar-header">
@@ -44,11 +44,11 @@
             <div class="navbar-collapse collapse">
                 <ul id="mainMenu" class="navbar-menu-left nav navbar-nav navbar-left">
                     @*<li class="active">@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li class="active"><a ui-sref="home">Home</a></li>
+                    <li class="active" ui-sref="home">Home</li>
                     @*<li class="active">@Html.ActionLink("Admin", "Index", "Admin")</li>*@
-                    <li class="active"><a ui-sref="admin">Admin</a></li>
-                    <li class="active"><a ui-sref="about">About</a></li>
-                    <li class="active"><a ui-sref="contact">Contact</a></li>
+                    <li class="active" ui-sref="admin">Admin</li>
+                    <li class="active" ui-sref="about">About</li>
+                    <li class="active" ui-sref="contact">Contact</li>
                 </ul>
                 @*@Html.Partial("Infrastructure/_MainNav")*@
                 @Html.Partial("_LoginPartial")
@@ -72,6 +72,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/angular.min.js")
     @Scripts.Render("~/Scripts/angular-ui-router.min.js")
+    @Scripts.Render("~/Scripts/app/security/security-factory.js")
     @Scripts.Render("~/Scripts/app/card-data-factory.js")
     @Scripts.Render("~/Scripts/app/routing.js")
     @Scripts.Render("~/Scripts/utility.js")

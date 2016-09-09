@@ -11,10 +11,24 @@ namespace SpanishFlashcards
         {
             config.MapHttpAttributeRoutes();
 
+            // Routes alone
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "ApiRouteAlone",
+                routeTemplate: "api/{controller}"
+            );
+
+            // Routes with IDs
+            config.Routes.MapHttpRoute(
+                name: "ApiRouteWithID",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: null,
+                constraints: new { id = @"^\d+$" } // Only integers
+            );
+
+            // Routes with Actions
+            config.Routes.MapHttpRoute(
+                name: "ApiRouteWithAction",
+                routeTemplate: "api/{controller}/{action}"
             );
         }
     }

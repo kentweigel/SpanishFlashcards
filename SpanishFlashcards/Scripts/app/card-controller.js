@@ -165,4 +165,4 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                     (card.PartOfSpeech === 'Conjunction' && vm.includeConjunctions);
         }
     }
-})();
+}());

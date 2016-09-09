@@ -9,55 +9,58 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+            <form class="form-horizontal" data-ng-submit="securityCtrl.login()">
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <label name="Email" class="col-md-2 control-label" for="Email">Email</label>
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        <input name="Email" class="form-control focus" id="email" type="text" data-val-required="The Email field is required." data-val-email="The Email field is not a valid e-mail address." data-val="true" />
+                        <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Email"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <label name="Password" class="col-md-2 control-label" for="Password">Password</label>
                     <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        <input name="Password" class="form-control" id="password" type="password" data-val-required="The Password field is required."  data-val="true" />
+                        <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Password"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                            @*@Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)*@
+                            <input name="RememberMe" id="rememberMe" type="checkbox" data-val="true" data-val-required="The RememberMe field is required." value="true"/>
+                            <label for="RememberMe">Remember me?</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        @*<input type="submit" value="Log in" class="btn btn-default" />*@
+                        @*<a href="javascript:document.getElementById('loginForm').submit()" target="_self">Log in</a>*@
+                        <input type="submit" class="btn btn-default" value="Log in"/>
                     </div>
                 </div>
                 <p>
                     @*@Html.ActionLink("Register as a new user", "Register")*@
-                    <a href="" data-ng-click="navCtrl.setCurrentPanel('Register')">Register</a>
+                    <a href="" ui-sref="register">Register</a>
                 </p>
                 @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>*@
+            </form>
         </section>
     </div>
     @*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
 </div>
 
 @section Scripts {

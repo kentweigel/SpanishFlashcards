@@ -1,26 +1,14 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-menu-right" }))
-    {
-    @Html.AntiForgeryToken()
-
-    <ul id="loginMenu" class="shrink">
-        @*<li class="active">
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>*@
-        <li class="active" data-ng-click="navCtrl.setCurrentPanel('Manage')">Manage</li>
-        @*<li class="active"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
-        <li class="active" data-ng-click="document.getElementById('logoutForm').submit()">Log off</li>
+@Html.AntiForgeryToken()
+<div ng-show="securityCtrl.userName">
+    <ul id="loginMenu" class="shrink navbar-menu-right">
+        <li class="active" ui-sref="manage">{{ securityCtrl.userName }}</li>
+        <li class="active" data-ng-click="securityCtrl.logoff()">Log off</li>
     </ul>
-    }
-}
-else
-{
+</div>
+<div ng-hide="securityCtrl.userName">
     <ul id="loginMenu" class="nav navbar-menu-right">
-        @*<li class="active">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li id = "registerLink" class="active" data-ng-click="navCtrl.setCurrentPanel('Register')">Register</li>
-        @*<li class="active">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-        <li id = "loginLink" class="active" data-ng-click="navCtrl.setCurrentPanel('Login')">Log in</li>
+        <li id="registerLink" class="active" ui-sref="register">Register</li>
+        <li id="loginLink" class="active" ui-sref="login">Log in</li>
     </ul>
-}
+</div>

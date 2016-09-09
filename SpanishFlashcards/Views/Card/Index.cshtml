@@ -43,12 +43,12 @@
         </tr>
     }*@
 
-    <tr data-ng-repeat="card in controller.cards">
+    <tr data-ng-repeat="card in ctrl.cards">
         <td>{{ card.Spanish }}</td>
         <td>{{ card.English }}</td>
         <td>{{ card.PartOfSpeech }}</td>
         <td id="recordActionButtons">
-            <a title="Edit" class="btn btn-xs btn-success" href="" data-ng-click="navCtrl.setCurrentPanel('EditCard');controller.setCurrentCard($index)">
+            <a title="Edit" class="btn btn-xs btn-success" href="" data-ng-click="navCtrl.setCurrentPanel('EditCard');ctrl.setCurrentCard($index)">
                 <i class="glyphicon glyphicon-pencil"></i>
                 <span class="sr-only">Edit</span>
             </a>
