@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('SecurityController', SecurityController);
 
-    SecurityController.$inject = ['securityData', '$state'];
+    SecurityController.$inject = ['securityData', '$state', '$window'];
 
-    function SecurityController(securityData, $state) {
+    function SecurityController(securityData, $state, $window) {
         var vm = this;
         vm.userName = undefined;
         //vm.returnState = $state.params.returnState;
@@ -38,7 +38,8 @@
             securityData.logoff()
                 .then(function () {
                     vm.userName = undefined;
-                    $state.go('home')
+                    //$state.go('home')
+                    $window.location.reload();
                 });
         }
     }
