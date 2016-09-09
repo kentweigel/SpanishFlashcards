@@ -11,21 +11,21 @@
             $stateProvider
                 .state('home', {
                     url: "/home",
-                    templateUrl: "/Card/Single",
+                    templateUrl: "Card/Single",
                     controller: "CardController",
                     controllerAs: "ctrl"
                 })
                 .state('admin', {
                     url: "/admin",
                     cache: false,
-                    templateUrl: "/Card/Index",
+                    templateUrl: "Card/Index",
                     controller: "CardAdminController",
                     controllerAs: "ctrl"
                 })
                 //.state('admin.create', { // Nesting is when you have another <ui-view> tag on the admin page. We don't have that, so don't use nested views.
                 .state('create', {
                     url: "/create",
-                    templateUrl: "/Card/Create"
+                    templateUrl: "Card/Create"
                     //url: "/Card/Create", // "/create",
                     ////templateUrl: "/Card/Create"
                     //external: true
@@ -33,44 +33,44 @@
                 .state('edit', {
                     url: "/edit/:id",
                     templateProvider: ['$stateParams', '$templateRequest', function ($stateParams, $templateRequest) {
-                        return $templateRequest("/Card/Edit/" + $stateParams.id);
+                        return $templateRequest("Card/Edit/" + $stateParams.id);
                     }]
                     //params: {
                     //    id: null
                     //},
-                    //templateUrl: "/Card/Edit",
+                    //templateUrl: "Card/Edit",
                     //controller: "CardAdminController",
                     //controllerAs: "ctrl"
                 })
                 .state('delete', {
                     url: "/delete/:id",
                     templateProvider: ['$stateParams', '$templateRequest', function ($stateParams, $templateRequest) {
-                        return $templateRequest("/Card/Delete/" + $stateParams.id);
+                        return $templateRequest("Card/Delete/" + $stateParams.id);
                     }]
                 })
                 .state('login', {
                     url: "/login/:returnState",
-                    templateUrl: "/Account/Login"
+                    templateUrl: "Account/Login"
                 })
                 .state('logoff', {
                     url: "/logoff",
-                    templateUrl: "/Account/LogOff"
+                    templateUrl: "Account/LogOff"
                 })
                 .state('register', {
                     url: "/register",
-                    templateUrl: "/Account/Register"
+                    templateUrl: "Account/Register"
                 })
                 .state('manage', {
                     url: "/manage",
-                    templateUrl: "/Manage/Index"
+                    templateUrl: "Manage/Index"
                 })
                 .state('about', {
                     url: "/about",
-                    templateUrl: "/Home/About"
+                    templateUrl: "Home/About"
                 })
                 .state('contact', {
                     url: "/contact",
-                    templateUrl: "/Home/Contact"
+                    templateUrl: "Home/Contact"
                 });
         })
         //.run(function ($rootScope, $window) {

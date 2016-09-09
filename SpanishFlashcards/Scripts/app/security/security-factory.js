@@ -13,7 +13,7 @@
             return $http({
                 method: 'POST',
                 data: { email: email, password: password, rememberMe: rememberMe },
-                url: /*service.getBaseLocation() +*/ 'Api/AccountApi/Login/',
+                url: 'Api/AccountApi/Login/',
                 params: { timeout: 300 }
             }).then(function (data, status, headers, config) {
                 console.log('Login returned: ' + data.statusText);
@@ -27,7 +27,7 @@
         service.logoff = function () {
             return $http({
                 method: 'POST',
-                url: /*service.getBaseLocation() +*/ 'Api/AccountApi/LogOff/',
+                url: 'Api/AccountApi/LogOff/',
                 params: { timeout: 300 }
             }).then(function (data, status, headers, config) {
                 console.log('Logoff returned: ' + data.statusText);

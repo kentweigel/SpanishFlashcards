@@ -17,7 +17,7 @@
                 return $q.when(service.cards);
             }
             else {
-                return $http.get(service.getBaseLocation() + 'Api/CardApi/', { params: { timeout: 300 } })
+                return $http.get('Api/CardApi/', { params: { timeout: 300 } })
                     .then(function (data, status, headers, config) {
                         service.cards = data.data;
                         return service.cards;
@@ -34,7 +34,7 @@
                 return $q.when(service.partsOfSpeech);
             }
             else {
-                return $http.get(service.getBaseLocation() + 'Api/PartOfSpeechApi/', { params: { timeout: 300 } })
+                return $http.get('Api/PartOfSpeechApi/', { params: { timeout: 300 } })
                     .then(function (data, status, headers, config) {
                         service.partsOfSpeech = data.data;
                         return service.partsOfSpeech;
@@ -47,7 +47,7 @@
         }
 
         service.postCard = function (card) {
-            return $http.post(service.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
+            return $http.post('Api/CardApi/', card, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
                     return data.data;   // The returned data is the new card Id field.
                 })
@@ -58,7 +58,7 @@
         }
 
         service.putCard = function (card) {
-            return $http.put(service.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
+            return $http.put('Api/CardApi/', card, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
                     return data.data;
                 })
@@ -69,7 +69,7 @@
         }
 
         service.deleteCard = function (card) {
-            return $http.delete(service.getBaseLocation() + 'Api/CardApi/', card, { params: { timeout: 300 } })
+            return $http.delete('Api/CardApi/', card, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
                     return data.data;   // The returned data is the new card Id field.
                 })
@@ -88,7 +88,7 @@
                 HintUsed: hintUsed
             }
 
-            return $http.post(service.getBaseLocation() + 'Api/HistoryApi/', data, { params: { timeout: 300 } })
+            return $http.post('Api/HistoryApi/', data, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
                     return data.data;   // The returned data is the new history Id field, but we don't need it, since we only see aggregate history. (sums)
                 })
@@ -96,13 +96,6 @@
                     console.log(error);
                     return error;
                 });
-        }
-
-        service.getBaseLocation = function () {
-            var baseUrlElement = document.getElementById("baseUrl");
-            var baseUrl = baseUrlElement.value;
-
-            return baseUrl;
         }
 
         return service;
