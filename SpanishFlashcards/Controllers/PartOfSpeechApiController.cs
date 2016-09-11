@@ -37,7 +37,7 @@ namespace SpanishFlashcards.Controllers
 
             try
             {
-                var partsOfSpeech = await m_dataContext.PartOfSpeech.Select(pos => pos.Name).ToArrayAsync();
+                var partsOfSpeech = await m_dataContext.PartOfSpeech.ToArrayAsync();
 
                 return this.Ok(partsOfSpeech);
             }

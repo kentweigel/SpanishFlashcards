@@ -4,31 +4,32 @@
     angular.module('app')
         .controller('CardAdminController', CardAdminController);
 
-    CardAdminController.$inject = ['cardData', 'securityData'];
+    CardAdminController.$inject = ['cardData', 'securityData', '$state'];
 
-    function CardAdminController(cardData, securityData) {
+    function CardAdminController(cardData, securityData, $state) {
         var vm = this;
 
         vm.cards = [];
         vm.partsOfSpeech = [];
         vm.currentCard = undefined;
-        //vm.selectedPartOfSpeech = undefined;
 
         getCards();
         getPartsOfSpeech();
-        $('.focus').focus();    // Give focus to selected control, since utility.js functions don't run on ui-router state change, only on document ready.
+        $('.focus').focus();
 
         function getCards() {
             cardData.getCards()
                 .then(function (result) {
                     vm.cards = result;
 
+                    // If a card id was passed in, then set currentCard.
                     if (vm.cards.length > 0) {
-                        vm.setCurrentCard(0);
+                        if ($state.params.id) {
+                            vm.currentCard = vm.cards.find(function (c) { return c.id === Number($state.params.id) });
+                        }
                     }
                     else {
                         vm.currentCard = undefined;
-                        //vm.selectedPartOfSpeech = 'Noun';
                     }
                 })
                 .catch(function (error) {
@@ -54,26 +55,38 @@
                 });
         }
 
-        vm.setCurrentCard = function (index) {
-            vm.currentCard = vm.cards[index];
-            //vm.selectedPartOfSpeech = vm.currentCard.PartOfSpeech;
-        }
+        //vm.setCurrentCard = function (index) {
+        //    vm.currentCard = vm.cards[index];
+        //    //vm.selectedPartOfSpeech = vm.currentCard.PartOfSpeech;
+        //}
 
         vm.saveNewCard = function () {
-            cardData.postCard(vm.cards[vm.currentIndex])
+            var spanishBox = document.getElementById('spanish');
+            var englishBox = document.getElementById('english');
+            var partOfSpeechSelect = document.getElementById('partOfSpeech');
+            var card = {
+                id: -1,
+                spanish: spanishBox.value,
+                english: englishBox.value,
+                partOfSpeech: partOfSpeechSelect.value
+            };
+
+            cardData.postCard(card)
                 .then(function (result) {
                     console.log('saveNewCard returned success.');
+                    $state.go('admin');
                 })
                 .catch(function (error) {
-                    console.log('saveNewCard returned failure.');
+                    console.log('saveNewCard returned failure: ' + error.data.message);
                     alert('Unable to save new card on the server.');
                 });
         }
 
         vm.saveCurrentCard = function () {
-            cardData.putCard(vm.cards[vm.currentIndex])
+            cardData.putCard(vm.currentCard)
                 .then(function (result) {
                     console.log('saveCurrentCard returned success.');
+                    $state.go('admin');
                 })
                 .catch(function (error) {
                     console.log('saveCurrentCard returned failure.');
@@ -81,10 +94,11 @@
                 });
         }
 
-        vm.deleteCurrentCard = function () {
-            cardData.postCard(vm.cards[vm.currentIndex])
+        vm.deleteCard = function (id) {
+            cardData.deleteCard(id)
                 .then(function (result) {
                     console.log('deleteCurrentCard returned success.');
+                    $state.go('admin');
                 })
                 .catch(function (error) {
                     console.log('deleteCurrentCard returned failure.');
@@ -92,12 +106,12 @@
                 });
         }
 
-        vm.login = function (form) {
-            // This is only here to test the theory that when not authorized for an MVC page
-            // it redirects to Login page and ui-router still uses the controller for the state
-            // that was linked to the unauthorized page. That is truly the case. Need to get
-            // MVC to return 403 rather than redirect, and then trap in ui-router resolve??
-            securityData.login(email, password, rememberMe);
-        }
+        //vm.login = function (form) {
+        //    // This is only here to test the theory that when not authorized for an MVC page
+        //    // it redirects to Login page and ui-router still uses the controller for the state
+        //    // that was linked to the unauthorized page. Result: that is truly the case. Need to get
+        //    // MVC to return 403 rather than redirect, and then trap in ui-router resolve??
+        //    securityData.login(email, password, rememberMe);
+        //}
     }
 }());

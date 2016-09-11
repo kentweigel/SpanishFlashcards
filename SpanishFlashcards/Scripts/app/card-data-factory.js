@@ -24,7 +24,7 @@
                     })
                     .catch(function (error) {
                         console.log(error);
-                        return error;
+                        throw error;
                     });
             }
         }
@@ -41,7 +41,7 @@
                     })
                     .catch(function (error) {
                         console.log(error);
-                        return error;
+                        throw error;
                     });
             }
         }
@@ -49,33 +49,50 @@
         service.postCard = function (card) {
             return $http.post('Api/CardApi/', card, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
-                    return data.data;   // The returned data is the new card Id field.
+                    card = data.data;
+                    card.partOfSpeech = service.partsOfSpeech.find(function (p) { return p.id === +card.partOfSpeech; }).name;
+                    service.cards[service.cards.length] = card;
+                    return data.data;   // The returned data is the new card.
                 })
                 .catch(function (error) {
                     console.log(error);
-                    return error;
+                    throw error;
                 });
         }
 
         service.putCard = function (card) {
-            return $http.put('Api/CardApi/', card, { params: { timeout: 300 } })
+            var dbCard = {
+                Id: card.id,
+                Spanish: card.spanish,
+                English: card.english,
+                PartOfSpeech: service.partsOfSpeech.find(function(p) { return p.name === card.partOfSpeech }).id
+            }; // Camel vs Pascal case doesn't appear to matter here. See POST here and in card-admin-controller.js
+            return $http.put('Api/CardApi/', dbCard, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
-                    return data.data;
+                    card = data.data;
+                    card.partOfSpeech = service.partsOfSpeech.find(function (p) { return p.id === +card.partOfSpeech; }).name;
+                    return data.data;   // The returned data is the new card.
                 })
                 .catch(function (error) {
                     console.log(error);
-                    return error;
+                    throw error;
                 });
         }
 
-        service.deleteCard = function (card) {
-            return $http.delete('Api/CardApi/', card, { params: { timeout: 300 } })
+        service.deleteCard = function (id) {
+            return $http.delete('Api/CardApi/' + id, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
+                    var index = service.cards.findIndex(function(c) { return c.id === id });
+                    if (index >= 0) {
+                        service.cards.splice(index, 1);
+                    } else {
+                        console.log('cardData.deleteCard failed to find card with id = ' + id);
+                    }
                     return data.data;   // The returned data is the new card Id field.
                 })
                 .catch(function (error) {
                     console.log(error);
-                    return error;
+                    throw error;
                 });
         }
 
@@ -94,7 +111,7 @@
                 })
                 .catch(function (error) {
                     console.log(error);
-                    return error;
+                    throw error;
                 });
         }
 

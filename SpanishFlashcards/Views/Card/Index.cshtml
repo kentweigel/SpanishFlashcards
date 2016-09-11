@@ -5,7 +5,7 @@
 
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
-    <a href="" data-ng-click="navCtrl.setCurrentPanel('Create')">Create</a>
+    <a href="" ui-sref="create">Create</a>
 </p>
 <table class="table">
     <tr>
@@ -44,11 +44,11 @@
     }*@
 
     <tr data-ng-repeat="card in ctrl.cards">
-        <td>{{ card.Spanish }}</td>
-        <td>{{ card.English }}</td>
-        <td>{{ card.PartOfSpeech }}</td>
+        <td>{{ card.spanish }}</td>
+        <td>{{ card.english }}</td>
+        <td>{{ card.partOfSpeech }}</td>
         <td id="recordActionButtons">
-            <a title="Edit" class="btn btn-xs btn-success" href="" data-ng-click="navCtrl.setCurrentPanel('EditCard');ctrl.setCurrentCard($index)">
+            <a title="Edit" class="btn btn-xs btn-success" ui-sref="edit({ id: card.id })">
                 <i class="glyphicon glyphicon-pencil"></i>
                 <span class="sr-only">Edit</span>
             </a>
@@ -56,7 +56,7 @@
                 <i class="glyphicon glyphicon-zoom-in"></i>
                 <span class="sr-only">Details</span>
             </a>*@
-            <a title="Delete" class="btn btn-xs btn-danger" href="/Card/Delete/card.Id">
+            <a title="Delete" class="btn btn-xs btn-danger" ui-sref="delete({ id: card.id })">
                 <i class="glyphicon glyphicon-trash"></i>
                 <span class="sr-only">Delete</span>
             </a>

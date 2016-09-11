@@ -59,10 +59,10 @@
                 <div id="questionLabel" data-ng-show="ctrl.showingQuestion" data-ng-cloak="">Question:</div>
                 <div id="answerLabel" data-ng-show="!ctrl.showingQuestion" data-ng-cloak="">Answer:</div>
                 <div id="cardTextWrapper">
-                    <div id="cardQuestionText" class="cardText" data-ng-show="ctrl.spanishToEnglish ? ctrl.showingQuestion : !ctrl.showingQuestion" data-ng-cloak="">{{ ctrl.cards[ctrl.currentIndex].Spanish }}</div>
-                    <div id="cardAnswerText" class="cardText" data-ng-show="ctrl.spanishToEnglish ? !ctrl.showingQuestion : ctrl.showingQuestion" data-ng-cloak="">{{ ctrl.cards[ctrl.currentIndex].English }}</div>
+                    <div id="cardQuestionText" class="cardText" data-ng-show="ctrl.spanishToEnglish ? ctrl.showingQuestion : !ctrl.showingQuestion" data-ng-cloak="">{{ ctrl.cards[ctrl.currentIndex].spanish }}</div>
+                    <div id="cardAnswerText" class="cardText" data-ng-show="ctrl.spanishToEnglish ? !ctrl.showingQuestion : ctrl.showingQuestion" data-ng-cloak="">{{ ctrl.cards[ctrl.currentIndex].english }}</div>
                 </div>
-                <div id="partOfSpeech" data-ng-cloak="">Part of Speech: {{ ctrl.cards[ctrl.currentIndex].PartOfSpeech }}</div>
+                <div id="partOfSpeech" data-ng-cloak="">Part of Speech: {{ ctrl.cards[ctrl.currentIndex].partOfSpeech }}</div>
             </div>
         </div>
         <div id="card-nav" class="row">
@@ -103,13 +103,13 @@
         </thead>
         <tbody>
             <tr data-ng-repeat="card in ctrl.cards track by $index">
-                <th>{{ card.Id }}</th>
-                <th>{{ card.Spanish }}</th>
-                <th>{{ card.English }}</th>
-                <th>{{ card.PartOfSpeech }}</th>
-                <th>{{ card.CorrectCount }}</th>
-                <th>{{ card.TotalCount }}</th>
-                <th>{{ card.HintUsedCount }}</th>
+                <th>{{ card.id }}</th>
+                <th>{{ card.spanish }}</th>
+                <th>{{ card.english }}</th>
+                <th>{{ card.partOfSpeech }}</th>
+                <th>{{ card.correctCount }}</th>
+                <th>{{ card.totalCount }}</th>
+                <th>{{ card.hintUsedCount }}</th>
                 @*<th>{{ Math.round(ctrl.getCardScore(card), -2) }}</th>*@
                 <th>{{ ctrl.getCardScore(card) | number:2 }}</th>
             </tr>

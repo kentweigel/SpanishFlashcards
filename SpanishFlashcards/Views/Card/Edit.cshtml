@@ -49,7 +49,7 @@
         </p>
     }*@
 
-<form data-ng-submit="controller.updateCard();navCtrl.setCurrentPanel('CardAdmin')" novalidate>
+<form class="form-horizontal" data-ng-submit="ctrl.saveCurrentCard(Model.id)">
     <fieldset>
         <legend>Card</legend>
 
@@ -58,30 +58,33 @@
                 <label for="spanishTextbox" class="control-label col-md-1">Spanish:</label>
             </div>
             <div class="col-md-2">
-                <input id="spanishTextbox" type="text" class="form-control" data-ng-model="controller.currentCard.Spanish" />
+                <input id="spanishTextbox" type="text" class="form-control focus" data-ng-model="ctrl.currentCard.spanish" />
             </div>
 
             <div class="editor-label">
                 <label for="englishTextbox" class="control-label col-md-1">English:</label>
             </div>
             <div class="col-md-2">
-                <input id="englishTextbox" type="text" class="form-control" data-ng-model="controller.currentCard.English" />
+                <input id="englishTextbox" type="text" class="form-control" data-ng-model="ctrl.currentCard.english" />
             </div>
 
             <div class="editor-label">
                 <label for="partOfSpeechTextbox" class="control-label col-md-2">Part of Speech:</label>
             </div>
             <div class="col-md-2">
-                @*<input id="partOfSpeechTextbox" type="text" class="form-control" data-ng-model="controller.cards[controller.currentIndex].PartOfSpeech" />*@
+                @*<input id="partOfSpeechTextbox" type="text" class="form-control" data-ng-model="ctrl.cards[ctrl.currentIndex].PartOfSpeech" />*@
                 @*@Html.DropDownListFor(model => model.Card.PartOfSpeech, Model.PartOfSpeechSelectList, htmlAttributes: new { @class = "form-control text-box single-line" })*@
-                <select data-ng-options="part for part in controller.partsOfSpeech" data-ng-required="required" @* See note in controller about the grief this select caused. *@
-                        data-ng-model="controller.currentCard.PartOfSpeech" class="form-control text-box single-line"></select>
+                @*<select data-ng-options="part for part in ctrl.partsOfSpeech" data-ng-required="required" @* See note in controller about the grief this select caused. *@
+                @*        data-ng-model="ctrl.currentCard.PartOfSpeech" class="form-control text-box single-line"></select>*@
+                <select class="form-control" name="partOfSpeech" id="partOfSpeech" data-val-required="The Part of Speech field is required." data-val="true" data-ng-model="ctrl.currentCard.partOfSpeech">
+                    <option ng-repeat="partOfSpeech in ctrl.partsOfSpeech" value="{{ partOfSpeech.name }}">{{ partOfSpeech.name }}</option>
+                </select>
             </div>
         </div>
     </fieldset>
 
     <p>
-        <input type="submit" value="Save" /> | 
-        <a href="" data-ng-click="navCtrl.setCurrentPanel('CardAdmin')">Back to List</a>
+        <input type="submit" value="Save" class="btn btn-default" /> | 
+        <a ui-sref="admin">Back to List</a>
     </p>
 </form>

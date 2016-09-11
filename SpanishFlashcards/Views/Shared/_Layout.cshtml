@@ -70,11 +70,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/angular.min.js")
     @Scripts.Render("~/Scripts/angular-ui-router.min.js")
+    @Scripts.Render("~/Scripts/polyfills.js")
     @Scripts.Render("~/Scripts/app/security/security-factory.js")
     @Scripts.Render("~/Scripts/app/card-data-factory.js")
     @Scripts.Render("~/Scripts/app/routing.js")
-    @Scripts.Render("~/Scripts/utility.js")
-    @*<script src="~/Scripts/utility.js"></script>*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

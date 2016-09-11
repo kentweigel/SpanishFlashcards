@@ -25,28 +25,25 @@
                 //.state('admin.create', { // Nesting is when you have another <ui-view> tag on the admin page. We don't have that, so don't use nested views.
                 .state('create', {
                     url: "/create",
-                    templateUrl: "Card/Create"
-                    //url: "/Card/Create", // "/create",
-                    ////templateUrl: "/Card/Create"
-                    //external: true
+                    templateUrl: "Card/Create",
+                    controller: "CardAdminController",
+                    controllerAs: "ctrl"
                 })
                 .state('edit', {
                     url: "/edit/:id",
                     templateProvider: ['$stateParams', '$templateRequest', function ($stateParams, $templateRequest) {
                         return $templateRequest("Card/Edit/" + $stateParams.id);
-                    }]
-                    //params: {
-                    //    id: null
-                    //},
-                    //templateUrl: "Card/Edit",
-                    //controller: "CardAdminController",
-                    //controllerAs: "ctrl"
+                    }],
+                    controller: "CardAdminController",
+                    controllerAs: "ctrl"
                 })
                 .state('delete', {
                     url: "/delete/:id",
                     templateProvider: ['$stateParams', '$templateRequest', function ($stateParams, $templateRequest) {
                         return $templateRequest("Card/Delete/" + $stateParams.id);
-                    }]
+                    }],
+                    controller: "CardAdminController",
+                    controllerAs: "ctrl"
                 })
                 .state('login', {
                     url: "/login/:returnState",

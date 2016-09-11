@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -83,6 +84,55 @@ namespace SpanishFlashcards.Controllers
             catch (Exception ex)
             {
                 return this.BadRequest(ex.Message);
+            }
+        }
+
+        public async Task<IHttpActionResult> Post(Card card)
+        {
+            if (ModelState.IsValid)
+            {
+                m_dataContext.Card.Add(card);
+                await m_dataContext.SaveChangesAsync();
+                return Ok(card);
+            }
+
+            var builder = new StringBuilder();
+            builder.AppendLine("Error creating new card in CardApiController.Post:");
+            foreach (var part in ModelState)
+            {
+                foreach (var error in part.Value.Errors)
+                {
+                    builder.AppendLine(error.Exception.Message);
+                }
+            }
+
+            return BadRequest(builder.ToString());
+        }
+
+        public async Task<IHttpActionResult> Put(Card card)
+        {
+            if (ModelState.IsValid)
+            {
+                m_dataContext.Entry(card).State = System.Data.Entity.EntityState.Modified;
+                await m_dataContext.SaveChangesAsync();
+                return Ok(card);
+            }
+
+            return BadRequest("Error saving card.");
+        }
+
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            try
+            {
+                Card card = m_dataContext.Card.Find(id);
+                m_dataContext.Card.Remove(card);
+                await m_dataContext.SaveChangesAsync();
+                return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

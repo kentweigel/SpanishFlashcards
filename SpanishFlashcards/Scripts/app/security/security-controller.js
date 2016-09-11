@@ -10,7 +10,7 @@
         var vm = this;
         vm.userName = undefined;
         //vm.returnState = $state.params.returnState;
-        $('.focus').focus();    // Give focus to selected control, since utility.js functions don't run on ui-router state change, only on document ready.
+        $('.focus').focus();
         getCurrentUser();
 
         function getCurrentUser() {

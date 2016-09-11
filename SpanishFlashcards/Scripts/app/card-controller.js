@@ -52,6 +52,8 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
 
         getCards();
 
+        //$('.focus').focus(); // Not applicable for this controller
+
         function getCards() {
             cardData.getCards()
                 .then(function (result) {
@@ -77,7 +79,6 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                 })
                 .catch(function (error) {
                     console.log('postHistory returned failure.');
-                    alert('postHistory returned failure.');
                 })
         }
 
@@ -89,11 +90,11 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
         }
 
         vm.getCardScore = function (card) {
-            if (card.TotalCount == 0) {
+            if (card.totalCount == 0) {
                 return 0;
             }
             else {
-                return 1 + card.CorrectCount / card.TotalCount;
+                return 1 + card.correctCount / card.totalCount;
                 //return this.cards.length * card.CorrectCount / card.TotalCount;
             }
         }
@@ -109,9 +110,9 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
 
         vm.correctClick = function () {
             try {
-                vm.cards[vm.currentIndex].CorrectCount++;
-                vm.cards[vm.currentIndex].TotalCount++;
-                postHistory(vm.cards[vm.currentIndex].Id, true, false);
+                vm.cards[vm.currentIndex].correctCount++;
+                vm.cards[vm.currentIndex].totalCount++;
+                postHistory(vm.cards[vm.currentIndex].id, true, false);
                 vm.currentIndex++;
                 vm.currentIndex %= vm.cards.length;
                 //$scope.$apply(); This is unnecessary.
@@ -119,14 +120,14 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                 // Show question
                 vm.showingQuestion = true;
             } catch (e) {
-                alert(e.message);
+                console.log(e.message);
             }
         }
 
         vm.incorrectClick = function () {
             try {
-                vm.cards[vm.currentIndex].TotalCount++;
-                postHistory(vm.cards[vm.currentIndex].Id, false, false);
+                vm.cards[vm.currentIndex].totalCount++;
+                postHistory(vm.cards[vm.currentIndex].id, false, false);
                 //vm.currentIndex++; Don't do this. Since we are advancing the card, the next card will take it's place and have the same index.
                 //vm.currentIndex %= vm.cards.length;
 
@@ -145,7 +146,7 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
                 // Show question
                 vm.showingQuestion = true;
             } catch (e) {
-                alert(e.message);
+                console.log(e.message);
             }
         }
 
@@ -156,13 +157,13 @@ When wrapping in circular queue, decide whether to recalculate score. I lean tow
         }
 
         function cardFilter(card) {
-            return (card.PartOfSpeech === 'Noun' && vm.includeNouns) ||
-                    (card.PartOfSpeech === 'Verb' && vm.includeVerbs) ||
-                    (card.PartOfSpeech === 'Adjective' && vm.includeAdjectives) ||
-                    (card.PartOfSpeech === 'Adverb' && vm.includeAdverbs) ||
-                    (card.PartOfSpeech === 'Pronoun' && vm.includePronouns) ||
-                    (card.PartOfSpeech === 'Preposition' && vm.includePrepositions) ||
-                    (card.PartOfSpeech === 'Conjunction' && vm.includeConjunctions);
+            return (card.partOfSpeech === 'Noun' && vm.includeNouns) ||
+                    (card.partOfSpeech === 'Verb' && vm.includeVerbs) ||
+                    (card.partOfSpeech === 'Adjective' && vm.includeAdjectives) ||
+                    (card.partOfSpeech === 'Adverb' && vm.includeAdverbs) ||
+                    (card.partOfSpeech === 'Pronoun' && vm.includePronouns) ||
+                    (card.partOfSpeech === 'Preposition' && vm.includePrepositions) ||
+                    (card.partOfSpeech === 'Conjunction' && vm.includeConjunctions);
         }
     }
 }());

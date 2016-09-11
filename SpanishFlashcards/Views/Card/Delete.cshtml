@@ -37,12 +37,11 @@
         </dd>
     </dl>
 </fieldset>
-@using (Html.BeginForm())
-{
+<form class="form-horizontal" data-ng-submit="ctrl.deleteCard(@Model.Id)">
     @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Delete" class="btn btn-default" /> |
         @*@Html.ActionLink("Back to List", "Index")*@
-        <a href="" data-ng-click="navCtrl.setCurrentPanel('Admin')">Back to List</a>
+        <a ui-sref="admin">Back to List</a>
     </p>
-}
+</form>

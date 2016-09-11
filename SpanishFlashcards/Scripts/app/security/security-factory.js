@@ -20,7 +20,7 @@
             })
             .catch(function (error) {
                 console.log(error);
-                return error;
+                throw error;
             });
         }
 
@@ -34,7 +34,7 @@
             })
             .catch(function (error) {
                 console.log(error);
-                return error;
+                throw error;
             });
         }
 
@@ -50,7 +50,7 @@
             })
             .catch(function (error) {
                 console.log(error);
-                return error;
+                throw error;
             });
         }
 
