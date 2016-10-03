@@ -68,11 +68,12 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/angular.min.js")
-    @Scripts.Render("~/Scripts/angular-ui-router.min.js")
+    @Scripts.Render("~/Scripts/node_modules/angular/angular.min.js")
+    @Scripts.Render("~/Scripts/node_modules/angular-ui-router/release/angular-ui-router.min.js")
     @Scripts.Render("~/Scripts/polyfills.js")
     @Scripts.Render("~/Scripts/app/security/security-factory.js")
     @Scripts.Render("~/Scripts/app/card-data-factory.js")
+    @Scripts.Render("~/Scripts/app/app.js")
     @Scripts.Render("~/Scripts/app/routing.js")
     @RenderSection("scripts", required: false)
 </body>

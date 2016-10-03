@@ -1,4 +1,6 @@
-﻿(function iife() {
+﻿/// <reference path="../../node_modules/angular/angular.js" />
+
+(function iife() {
     'use strict';
 
     angular.module('cardData', [])
@@ -27,7 +29,7 @@
                         throw error;
                     });
             }
-        }
+        };
 
         service.getPartsOfSpeech = function () {
             if (service.partsOfSpeech.length > 0) {
@@ -44,7 +46,7 @@
                         throw error;
                     });
             }
-        }
+        };
 
         service.postCard = function (card) {
             return $http.post('Api/CardApi/', card, { params: { timeout: 300 } })
@@ -58,14 +60,14 @@
                     console.log(error);
                     throw error;
                 });
-        }
+        };
 
         service.putCard = function (card) {
             var dbCard = {
                 Id: card.id,
                 Spanish: card.spanish,
                 English: card.english,
-                PartOfSpeech: service.partsOfSpeech.find(function(p) { return p.name === card.partOfSpeech }).id
+                PartOfSpeech: service.partsOfSpeech.find(function (p) { return p.name === card.partOfSpeech; }).id
             }; // Camel vs Pascal case doesn't appear to matter here. See POST here and in card-admin-controller.js
             return $http.put('Api/CardApi/', dbCard, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
@@ -77,12 +79,12 @@
                     console.log(error);
                     throw error;
                 });
-        }
+        };
 
         service.deleteCard = function (id) {
             return $http.delete('Api/CardApi/' + id, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
-                    var index = service.cards.findIndex(function(c) { return c.id === id });
+                    var index = service.cards.findIndex(function (c) { return c.id === id; });
                     if (index >= 0) {
                         service.cards.splice(index, 1);
                     } else {
@@ -94,7 +96,7 @@
                     console.log(error);
                     throw error;
                 });
-        }
+        };
 
         service.postHistory = function (cardId, correct, hintUsed) {
             var data = {
@@ -103,7 +105,7 @@
                 Correct: correct,
                 CreatedDate: null,
                 HintUsed: hintUsed
-            }
+            };
 
             return $http.post('Api/HistoryApi/', data, { params: { timeout: 300 } })
                 .then(function (data, status, headers, config) {
@@ -113,7 +115,7 @@
                     console.log(error);
                     throw error;
                 });
-        }
+        };
 
         return service;
     }

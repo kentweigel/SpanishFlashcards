@@ -1,9 +1,9 @@
-﻿'use strict'
+﻿'use strict';
 
 if (!Array.prototype.find) {
     Array.prototype.find = function (predicate) {
         'use strict';
-        if (this == null) {
+        if (this === null) {
             throw new TypeError('Array.prototype.find called on null or undefined');
         }
         if (typeof predicate !== 'function') {
@@ -27,7 +27,7 @@ if (!Array.prototype.find) {
 if (!Array.prototype.findIndex) {
     Array.prototype.findIndex = function (predicate) {
         'use strict';
-        if (this == null) {
+        if (this === null) {
             throw new TypeError('Array.prototype.findIndex called on null or undefined');
         }
         if (typeof predicate !== 'function') {

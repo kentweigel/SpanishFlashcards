@@ -1,4 +1,6 @@
-﻿(function () {
+﻿/// <reference path="../../node_modules/angular/angular.js" />
+
+(function () {
     'use strict';
 
     angular.module('app')
@@ -25,7 +27,7 @@
                     // If a card id was passed in, then set currentCard.
                     if (vm.cards.length > 0) {
                         if ($state.params.id) {
-                            vm.currentCard = vm.cards.find(function (c) { return c.id === Number($state.params.id) });
+                            vm.currentCard = vm.cards.find(function (c) { return c.id === Number($state.params.id); });
                         }
                     }
                     else {
@@ -80,7 +82,7 @@
                     console.log('saveNewCard returned failure: ' + error.data.message);
                     alert('Unable to save new card on the server.');
                 });
-        }
+        };
 
         vm.saveCurrentCard = function () {
             cardData.putCard(vm.currentCard)
@@ -92,7 +94,7 @@
                     console.log('saveCurrentCard returned failure.');
                     alert('Unable to save card changes on the server.');
                 });
-        }
+        };
 
         vm.deleteCard = function (id) {
             cardData.deleteCard(id)
@@ -104,7 +106,7 @@
                     console.log('deleteCurrentCard returned failure.');
                     alert('Unable to delete card on the server.');
                 });
-        }
+        };
 
         //vm.login = function (form) {
         //    // This is only here to test the theory that when not authorized for an MVC page

@@ -17,14 +17,14 @@
                 <div class="form-group">
                     <label name="Email" class="col-md-2 control-label" for="Email">Email</label>
                     <div class="col-md-10">
-                        <input name="Email" class="form-control focus" id="email" type="text" data-val-required="The Email field is required." data-val-email="The Email field is not a valid e-mail address." data-val="true" />
+                        <input name="Email" class="form-control focus" id="email" type="text" data-val-required="The Email field is required." data-val-email="The Email field is not a valid e-mail address." data-val="true" data-ng-model="securityCtrl.email" />
                         <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Email"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label name="Password" class="col-md-2 control-label" for="Password">Password</label>
                     <div class="col-md-10">
-                        <input name="Password" class="form-control" id="password" type="password" data-val-required="The Password field is required."  data-val="true" />
+                        <input name="Password" class="form-control" id="password" type="password" data-val-required="The Password field is required."  data-val="true" data-ng-model="securityCtrl.password" />
                         <span class="field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="Password"></span>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <div class="checkbox">
                             @*@Html.CheckBoxFor(m => m.RememberMe)
                             @Html.LabelFor(m => m.RememberMe)*@
-                            <input name="RememberMe" id="rememberMe" type="checkbox" data-val="true" data-val-required="The RememberMe field is required." value="true"/>
+                            <input name="RememberMe" id="rememberMe" type="checkbox" data-val="true" data-val-required="The RememberMe field is required." value="true" data-ng-model="securityCtrl.rememberMe"/>
                             <label for="RememberMe">Remember me?</label>
                         </div>
                     </div>

@@ -17,12 +17,12 @@
                 params: { timeout: 300 }
             }).then(function (data, status, headers, config) {
                 console.log('Login returned: ' + data.statusText);
-            })
-            .catch(function (error) {
+                return data.data;
+            }, function (error) {
                 console.log(error);
                 throw error;
             });
-        }
+        };
 
         service.logoff = function () {
             return $http({
@@ -31,12 +31,11 @@
                 params: { timeout: 300 }
             }).then(function (data, status, headers, config) {
                 console.log('Logoff returned: ' + data.statusText);
-            })
-            .catch(function (error) {
+            }, function (error) {
                 console.log(error);
                 throw error;
             });
-        }
+        };
 
         service.currentUser = function () {
             return $http({
@@ -46,13 +45,12 @@
                 params: { timeout: 300 }
             }).then(function (data, status, headers, config) {
                 //console.log(data);
-                return data.data
-            })
-            .catch(function (error) {
+                return data.data;
+            }, function (error) {
                 console.log(error);
                 throw error;
             });
-        }
+        };
 
         return service;
     }

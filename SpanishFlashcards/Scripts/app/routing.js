@@ -1,10 +1,10 @@
-﻿/// <reference path="../angular.js" />
-/// <reference path="../angular-ui-router.js" />
+﻿/// <reference path="Scripts/node_modules/angular/angular.js" />
+/// <reference path="../../node_modules/angular-ui-router/angular-ui-router.js" />
 
 (function iife() {
     'use strict';
 
-    angular.module('app', ['cardData', 'securityData', 'ui.router'])
+    angular.module('app')
         .config(function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise("/home");
 
@@ -78,13 +78,13 @@
         //            $window.open(toState.url, '_self');
         //        }
         .run(function ($rootScope, $state) {
-            $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+            $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
                 if (error.status === 403) { // i.e. Forbidden
                     console.log('Forbidden was returned when switching to state named: ' + toState.name + '. Rerouting to login page.');
                     event.preventDefault();
                     $state.go('login', { returnState: toState.name });
                 }
-            })
+            });
         });
     //.run(function ($rootScope) {
     //    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {

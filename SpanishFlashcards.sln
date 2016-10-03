@@ -25,16 +25,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://kent-z77-pc:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = SpanishFlashcards\\SpanishFlashcards.csproj
-		SccProjectName1 = SpanishFlashcards
-		SccLocalPath1 = SpanishFlashcards
-		SccProjectUniqueName2 = SpanishFlashcards.EF\\SpanishFlashcards.EF.csproj
-		SccProjectName2 = SpanishFlashcards.EF
-		SccLocalPath2 = SpanishFlashcards.EF
-	EndGlobalSection
 EndGlobal

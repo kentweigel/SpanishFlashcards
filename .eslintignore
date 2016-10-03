@@ -1,0 +1,7 @@
+SpanishFlashcards/Scripts/node_modules/*
+jquery*
+respond*
+modernizr*
+bootstrap*
+SpanishFlashcards/obj/*
+_references.js

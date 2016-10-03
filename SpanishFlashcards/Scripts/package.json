@@ -1,0 +1,42 @@
+{
+  "name": "spanish-flashcards",
+  "version": "1.0.0",
+  "description": "Spanish Flashcards",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "npm-run-all --parallel lint",
+    "start": "node node_modules/.bin/webpack-dev-server --content-base app",
+    "build": "NODE_ENV=production node node_modules/.bin/webpack && cp app/index.html dist/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kentweigel/SpanishFlashcards.git"
+  },
+  "keywords": [
+    "spanish",
+    "flashcards",
+    "eslint",
+    "javascript",
+    "angular"
+  ],
+  "author": "Kent Weigel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kentweigel/SpanishFlashcards/issues"
+  },
+  "homepage": "https://github.com/kentweigel/SpanishFlashcards#readme",
+  "dependencies": {
+  },
+  "peerDependencies": {
+  },
+  "devDependencies": {
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "angular-ui-router": "0.3.1",
+    "bootstrap": "",
+    "jasmine": "^2.5.2",
+    "npm-run-all": "^3.1.0",
+    "phantomjs": "^2.1.7"
+  }
+}

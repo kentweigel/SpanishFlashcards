@@ -1,0 +1,17 @@
+﻿{
+  "Framework": "jasmine",
+  "References": [
+    { "Path": "node_modules/angular/angular.js" },
+    { "Path": "node_modules/angular-mocks/angular-mocks.js" },
+    { "Path": "node_modules/jasmine/bin/jasmine.js" },
+    { "Path": "app/app-mock.js" },
+    { "Path": "app/security/security-controller.js" },
+    { "Path": "jquery-3.1.0.js" }
+  ],
+  "Tests": [
+    {
+      "Path": "app",
+      "Includes": [ "*.spec.js" ]
+    }
+  ]
+}
