@@ -265,7 +265,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\File Folder.pubxml" />
-    <Content Include="Scripts\app\app-mock.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\card-admin-controller.js" />
     <Content Include="Scripts\app\card-controller.js" />
@@ -274,6 +273,7 @@
     <Content Include="Scripts\app\security\security-controller.js" />
     <Content Include="Scripts\app\security\security-controller.spec.js" />
     <Content Include="Scripts\app\security\security-factory.js" />
+    <Content Include="Scripts\app\security\security-factory.spec.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include=".eslintrc" />

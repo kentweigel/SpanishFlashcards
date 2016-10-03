@@ -37,6 +37,7 @@
     "bootstrap": "",
     "jasmine": "^2.5.2",
     "npm-run-all": "^3.1.0",
-    "phantomjs": "^2.1.7"
+    "phantomjs": "^2.1.7",
+    "requirejs": "^2.3.2"
   }
 }

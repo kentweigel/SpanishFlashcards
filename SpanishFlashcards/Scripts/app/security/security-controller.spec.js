@@ -1,4 +1,4 @@
-﻿/// <reference path="../../node_modules/jasmine/bin/jasmine.js" />
+﻿/// <reference path="/node_modules/jasmine/bin/jasmine.js" />
 
 'use strict';
 
@@ -8,7 +8,7 @@ describe('SecurityController', function () {
     var rejectLoginPromise = false;
     var rejectLogoffPromise = false;
     var $controller, $state, $window, $q, $rootScope;
-
+    
     // Create mock securityData factory
     //mockSecurityData = {  // toHaveBeenCalled throws error if this is used instead of spy
     //    currentUser: function () {
@@ -18,6 +18,8 @@ describe('SecurityController', function () {
     //        return $q.when(testEmailAddress);
     //    }
     //};
+
+    angular.module('app', []);
 
     $state = {
         params: {
@@ -33,6 +35,26 @@ describe('SecurityController', function () {
     };
 
     beforeEach(module('app'));
+
+    require.config({
+        baseUrl: '../../',
+        paths: {
+            "SecurityController": 'app/security/security-controller',
+            "jquery": 'jquery-3.1.0'
+        }
+    });
+
+    beforeEach(function (done) {
+        require(['jquery'], function () {
+            done();
+        });
+    });
+
+    beforeEach(function (done) {
+        require(['SecurityController'], function () {
+            done();
+        });
+    });
 
     beforeEach(function () {
         module(function ($provide) {
@@ -119,7 +141,7 @@ describe('SecurityController', function () {
         });
     });
 
-    describe('login failure', function () {
+    describe('login rejected', function () {
         it('should be rejected and should clear userName', function () {
             rejectLoginPromise = true;
             $controller.email = testEmailAddress;
@@ -142,7 +164,7 @@ describe('SecurityController', function () {
         });
     });
 
-    describe('logoff failure', function () {
+    describe('logoff rejected', function () {
         it('should be rejected', function () {
             rejectLoginPromise = false;
             rejectLogoffPromise = true;

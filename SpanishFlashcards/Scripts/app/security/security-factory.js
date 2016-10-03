@@ -4,9 +4,9 @@
     angular.module('securityData', [])
         .factory('securityData', SecurityData);
 
-    SecurityData.$inject = ['$http'];
+    SecurityData.$inject = ['$http', '$q'];
 
-    function SecurityData($http) {
+    function SecurityData($http, $q) {
         var service = this;
 
         service.login = function (email, password, rememberMe) {
@@ -20,7 +20,7 @@
                 return data.data;
             }, function (error) {
                 console.log(error);
-                throw error;
+                return $q.reject(error);
             });
         };
 
@@ -33,14 +33,14 @@
                 console.log('Logoff returned: ' + data.statusText);
             }, function (error) {
                 console.log(error);
-                throw error;
+                return $q.reject(error);
             });
         };
 
         service.currentUser = function () {
             return $http({
                 method: 'GET',
-                url: 'Api/AccountApi/CurrentUser',
+                url: 'Api/AccountApi/CurrentUser/',
                 data: undefined,
                 params: { timeout: 300 }
             }).then(function (data, status, headers, config) {
@@ -48,7 +48,7 @@
                 return data.data;
             }, function (error) {
                 console.log(error);
-                throw error;
+                return $q.reject(error);
             });
         };
 
