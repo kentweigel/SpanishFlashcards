@@ -45,7 +45,7 @@ namespace SpanishFlashcards.EF.Models
         public virtual ICollection<Hint> Hints { get; set; }
 
         [ForeignKey("Id")]
-        public virtual ICollection<History> History { get; set; }
+        public virtual ICollection<History> Histories { get; set; }
 
         #endregion Related Data Properties
     }

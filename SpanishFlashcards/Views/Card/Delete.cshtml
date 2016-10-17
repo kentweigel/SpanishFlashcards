@@ -17,7 +17,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Spanish)
+            <span>{{ ctrl.currentCard.spanish }}</span>
         </dd>
 
         <dt>
@@ -25,7 +25,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.English)
+            {{ ctrl.currentCard.english }}
         </dd>
 
         <dt>
@@ -33,12 +33,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PartOfSpeechRecord.Name)
+            {{ ctrl.currentCard.partOfSpeech }}
         </dd>
     </dl>
 </fieldset>
-<form class="form-horizontal" data-ng-submit="ctrl.deleteCard(@Model.Id)">
-    @Html.AntiForgeryToken()
+<form class="form-horizontal" data-ng-submit="ctrl.deleteCard(ctrl.currentCard.id)">
+    @*@Html.AntiForgeryToken()*@
     <p>
         <input type="submit" value="Delete" class="btn btn-default" /> |
         @*@Html.ActionLink("Back to List", "Index")*@

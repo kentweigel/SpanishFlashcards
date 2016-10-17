@@ -1,5 +1,6 @@
 ﻿/// <reference path="Scripts/node_modules/angular/angular.js" />
 /// <reference path="../../node_modules/angular-ui-router/angular-ui-router.js" />
+/// <reference path="card-admin-controller.js" />
 
 (function iife() {
     'use strict';
@@ -42,6 +43,13 @@
                     templateProvider: ['$stateParams', '$templateRequest', function ($stateParams, $templateRequest) {
                         return $templateRequest("Card/Delete/" + $stateParams.id);
                     }],
+                    //resolve: {
+                    //    currentCard: function($stateParams, cardData) {
+                    //        var card = cardData.cards.find(function (c) { return c.id === Number($stateParams.id); });
+                    //        return card;
+                    //    }
+                    //},
+                    //resolve: CardAdminController.resolve,
                     controller: "CardAdminController",
                     controllerAs: "ctrl"
                 })
@@ -56,10 +64,15 @@
                 .state('register', {
                     url: "/register",
                     templateUrl: "Account/Register"
+                    //data: { clearError: true }
                 })
                 .state('manage', {
                     url: "/manage",
                     templateUrl: "Manage/Index"
+                })
+                .state('changepassword', {
+                    url: "/changepassword",
+                    templateUrl: "Manage/ChangePassword"
                 })
                 .state('about', {
                     url: "/about",
@@ -77,13 +90,28 @@
         //            event.preventDefault();
         //            $window.open(toState.url, '_self');
         //        }
-        .run(function ($rootScope, $state) {
+        .run(function ($rootScope, $state, securityData) {
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
                 if (error.status === 403) { // i.e. Forbidden
                     console.log('Forbidden was returned when switching to state named: ' + toState.name + '. Rerouting to login page.');
                     event.preventDefault();
                     $state.go('login', { returnState: toState.name });
                 }
+            });
+
+            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, error) {
+                //if (toState.data.clearError) {
+                //    SecurityController.clearErrors();
+                //}
+                //if (toState.name === 'login' && fromState.name !== 'login') {
+                //    $state.params.returnState = fromState.name;
+                //}
+
+                securityData.clearErrorMessage();
+            });
+
+            $rootScope.$on('$viewContentLoaded', function (event, toState, toParams, fromState, fromParams, error) {
+                $('.focus').focus();
             });
         });
     //.run(function ($rootScope) {

@@ -5,12 +5,12 @@
     Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             <form class="form-horizontal" data-ng-submit="securityCtrl.login()">
-                @Html.AntiForgeryToken()
+                @*@Html.AntiForgeryToken()*@
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -37,6 +37,9 @@
                             <label for="RememberMe">Remember me?</label>
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <span class="text-danger">{{ securityCtrl.getErrorMessage() }}</span>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">

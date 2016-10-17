@@ -4,63 +4,38 @@
 }
 
 <p>
-    @*@Html.ActionLink("Create New", "Create")*@
-    <a href="" ui-sref="create">Create</a>
+    <a href="" data-ng-click="ctrl.currentCard = { id: -1, spanish: undefined, english: undefined, partOfSpeech: undefined }" ui-sref="create"
+       data-ng-disabled="ctrl.getCurrentUser() === undefined">Create</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @*@Html.DisplayNameFor(model => model.Spanish)*@
-            Spanish
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.English)*@
-            English
-        </th>
-        <th>
-            @*@Html.DisplayNameFor(model => model.PartOfSpeech)*@
-            Part of Speech
-        </th>
-        <th></th>
-    </tr>
 
-    @*@foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Spanish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.English)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PartOfSpeechRecord.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }*@
-
-    <tr data-ng-repeat="card in ctrl.cards">
-        <td>{{ card.spanish }}</td>
-        <td>{{ card.english }}</td>
-        <td>{{ card.partOfSpeech }}</td>
-        <td id="recordActionButtons">
-            <a title="Edit" class="btn btn-xs btn-success" ui-sref="edit({ id: card.id })">
-                <i class="glyphicon glyphicon-pencil"></i>
-                <span class="sr-only">Edit</span>
-            </a>
-            @*<a title="Details" class="btn btn-xs btn-info" href="/Card/Details/card.Id">
-                <i class="glyphicon glyphicon-zoom-in"></i>
-                <span class="sr-only">Details</span>
-            </a>*@
-            <a title="Delete" class="btn btn-xs btn-danger" ui-sref="delete({ id: card.id })">
-                <i class="glyphicon glyphicon-trash"></i>
-                <span class="sr-only">Delete</span>
-            </a>
-        </td>
-    </tr>
-
-</table>
+<div class="row">
+    <div class="admin-card-container col-xs-4 col-sm-3 col-lg-2" data-ng-repeat="card in ctrl.cards">
+        <div class="admin-card">
+            <div class="admin-card-spanish">
+                <span class="admin-card-spanish-label">Spanish:</span>
+                <span class="admin-card-spanish-value">{{ card.spanish }}</span>
+            </div>
+            <div class="admin-card-english">
+                <span class="admin-card-english-label">English:</span>
+                <span class="admin-card-english-value">{{ card.english }}</span>
+            </div>
+            <div class="admin-card-pos">
+                <span class="admin-card-pos-label">Part of Speech:</span>
+                <span class="admin-card-pos-value">{{ card.partOfSpeech }}</span>
+            </div>
+            <div class="card-actions">
+                <div class="record-action-buttons">
+                    <a title="Edit" class="btn btn-xs btn-success" data-ng-click="ctrl.currentCard = card" ui-sref="edit({ id: card.id })"
+                            data-ng-disabled="ctrl.getCurrentUser() === undefined">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                    <a title="Delete" class="btn btn-xs btn-danger" ui-sref="delete({ id: card.id })" data-ng-disabled="ctrl.getCurrentUser() === undefined">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span class="sr-only">Delete</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

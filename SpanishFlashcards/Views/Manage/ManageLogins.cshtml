@@ -34,7 +34,7 @@
                                 {
                                     using (Html.BeginForm("RemoveLogin", "Manage"))
                                     {
-                                        @Html.AntiForgeryToken()
+                                        @*@Html.AntiForgeryToken()*@
                                         <div>
                                             @Html.Hidden("loginProvider", account.LoginProvider)
                                             @Html.Hidden("providerKey", account.ProviderKey)
@@ -56,7 +56,7 @@
         {
             using (Html.BeginForm("LinkLogin", "Manage"))
             {
-                @Html.AntiForgeryToken()
+                @*@Html.AntiForgeryToken()*@
                 <div id="socialLoginList">
                 <p>
                     @foreach (AuthenticationDescription p in Model.OtherLogins)

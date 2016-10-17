@@ -101,6 +101,30 @@ legend {
     font-weight: bold;
 }
 
+.admin-card-container {
+    height: 120px;
+    position: relative;
+    padding: 0;
+    margin: 0px;
+}
+
+.admin-card {
+    height: 95%;
+    position: relative;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 4px;
+}
+
+.card-actions {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0px;
+    bottom: 6px;
+}
+
 [ng-cloak] {
     display: none !important;   /* This keeps the mustaches ({{ and }}) from displaying for AngularJS fields */
 }

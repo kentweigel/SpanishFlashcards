@@ -4,7 +4,9 @@
     { "Path": "node_modules/angular/angular.js" },
     { "Path": "node_modules/angular-mocks/angular-mocks.js" },
     { "Path": "node_modules/jasmine/bin/jasmine.js" },
-    { "Path": "node_modules/requirejs/require.js"}
+    { "Path": "node_modules/requirejs/require.js" },
+    { "Path": "jquery-3.1.0.js" },
+    { "Path": "polyfills.js" }
   ],
   "Tests": [
     {

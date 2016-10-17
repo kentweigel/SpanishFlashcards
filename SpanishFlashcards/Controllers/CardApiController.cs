@@ -3,6 +3,7 @@ using SpanishFlashcards.EF.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -93,20 +94,14 @@ namespace SpanishFlashcards.Controllers
             {
                 m_dataContext.Card.Add(card);
                 await m_dataContext.SaveChangesAsync();
+                // Don't try to fix inconsistency between using the partOfSpeech name in the AngularJS controller
+                // and the PartOfSpeech id here by using Include. Just patch it in the AngularJS factory. (ugh)
                 return Ok(card);
             }
 
-            var builder = new StringBuilder();
-            builder.AppendLine("Error creating new card in CardApiController.Post:");
-            foreach (var part in ModelState)
-            {
-                foreach (var error in part.Value.Errors)
-                {
-                    builder.AppendLine(error.Exception.Message);
-                }
-            }
+            var message = WebApiErrorHandling.ConcatModelStateErrors(ModelState);
 
-            return BadRequest(builder.ToString());
+            return BadRequest(message);
         }
 
         public async Task<IHttpActionResult> Put(Card card)
@@ -118,21 +113,26 @@ namespace SpanishFlashcards.Controllers
                 return Ok(card);
             }
 
-            return BadRequest("Error saving card.");
+            var message = WebApiErrorHandling.ConcatModelStateErrors(ModelState);
+
+            return BadRequest(message);
         }
 
         public async Task<IHttpActionResult> Delete(int id)
         {
             try
             {
-                Card card = m_dataContext.Card.Find(id);
+                Card card = await m_dataContext.Card.FindAsync(id);
+
+                await m_dataContext.Database.ExecuteSqlCommandAsync("delete History where CardId = @CardId", new SqlParameter("@CardId", id));
+
                 m_dataContext.Card.Remove(card);
                 await m_dataContext.SaveChangesAsync();
                 return Ok(id);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(WebApiErrorHandling.GetInnermostExceptionMessage(ex));
             }
         }
 

@@ -16,6 +16,7 @@ namespace SpanishFlashcards.Controllers
 
         //
         // GET: /Card/
+        [AllowAnonymous]
         [OutputCache(VaryByParam = "*", Duration = 0, NoStore = true)]  // This is necessary to keep user from accessing cached copy after logging out.
         public ActionResult Index()
         {
@@ -33,22 +34,21 @@ namespace SpanishFlashcards.Controllers
             return View(viewModel);
         }
 
-        //
-        // POST: /Card/Create
+        ////
+        //// POST: /Card/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(Card card)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Card.Add(card);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Card card)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Card.Add(card);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(card);
-        }
+        //    return View(card);
+        //}
 
         //
         // GET: /Card/Edit/5
@@ -69,22 +69,21 @@ namespace SpanishFlashcards.Controllers
             //return View();
         }
 
-        //
-        // POST: /Card/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Card card)
-        {
-            // This executes when you press the Save button in Edit.cshtml ("Save" is the label, not the action; the action (Edit) persists from the GET)
-            if (ModelState.IsValid)
-            {
-                db.Entry(card).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(card);
-        }
+        ////
+        //// POST: /Card/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(Card card)
+        //{
+        //    // This executes when you press the Save button in Edit.cshtml ("Save" is the label, not the action; the action (Edit) persists from the GET)
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(card).State = System.Data.Entity.EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(card);
+        //}
 
         //
         // GET: /Card/Delete/5
@@ -99,18 +98,17 @@ namespace SpanishFlashcards.Controllers
             return View(card);
         }
 
-        //
-        // POST: /Card/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Card card = db.Card.Find(id);
-            db.Card.Remove(card);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        ////
+        //// POST: /Card/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Card card = db.Card.Find(id);
+        //    db.Card.Remove(card);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         // GET: /Card/Single
         [AllowAnonymous]

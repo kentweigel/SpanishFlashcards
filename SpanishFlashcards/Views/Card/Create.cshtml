@@ -8,7 +8,7 @@
 <h2>Create</h2>
 
 <form class="form-horizontal" data-ng-submit="ctrl.saveNewCard()">
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <fieldset>
@@ -16,10 +16,10 @@
 
         <div class="row form-horizontal">
             <div class="editor-label">
-                <label class = "control-label col-md-1" for="spanish">Spanish</label>
+                <label class="control-label col-md-1" for="spanish">Spanish</label>
             </div>
             <div class="col-md-2 focus">
-                <input name="spanish" class = "form-control text-box single-line focus" id="spanish" type="text" data-val-required="The Spanish field is required." data-val-maxlength-max="35" data-val-maxlength="The Spanish field must be a string or array type with a maximum length of '35'." data-val="true" value=""/>
+                <input name="spanish" class = "form-control text-box single-line focus" id="spanish" type="text" data-ng-required="required" data-ng-model="ctrl.currentCard.spanish"/>
                 <span class="field-validation-valid" text-danger" data-valmsg-replace="true" data-valmsg-for="spanish"></span>
             </div>
 
@@ -27,14 +27,14 @@
                 <label class="control-label col-md-1" for="english">English</label>
             </div>
             <div class="col-md-2">
-                <input name="english" class="form-control text-box single-line" id="english" type="text" data-val-required="The English field is required." data-val-maxlength-max="35" data-val-maxlength="The English field must be a string or array type with a maximum length of '35'." data-val="true" value="" />
+                <input name="english" class="form-control text-box single-line" id="english" type="text" data-ng-required="required" data-ng-model="ctrl.currentCard.english" />
                 <span class="field-validation-valid" text-danger" data-valmsg-replace="true" data-valmsg-for="english"></span>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2" for="partOfSpeech">Part of Speech</label>
                 <div class="col-md-2">
-                    <select class="form-control" name="partOfSpeech" id="partOfSpeech" data-val-required="The Part of Speech field is required." data-val="true">
-                        <option ng-repeat="partOfSpeech in ctrl.partsOfSpeech" value="{{ partOfSpeech.id }}">{{ partOfSpeech.name }}</option>
+                    <select class="form-control" name="partOfSpeech" id="partOfSpeech" data-ng-required="required" data-ng-model="ctrl.currentCard.partOfSpeech">
+                        <option ng-repeat="partOfSpeech in ctrl.partsOfSpeech" value="{{ partOfSpeech.name }}">{{ partOfSpeech.name }}</option>
                     </select>
                     <span class = "field-validation-valid text-danger" data-valmsg-replace="true" data-valmsg-for="partOfSpeech"></span>
                 </div>

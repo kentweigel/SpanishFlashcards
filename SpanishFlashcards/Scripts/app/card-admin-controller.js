@@ -6,14 +6,20 @@
     angular.module('app')
         .controller('CardAdminController', CardAdminController);
 
-    CardAdminController.$inject = ['cardData', 'securityData', '$state'];
+    CardAdminController.$inject = ['cardData', '$state'];
 
-    function CardAdminController(cardData, securityData, $state) {
+    //CardAdminController.resolve = {
+    //    currentCard: function (cardData) {
+    //        return 'Test';
+    //    }
+    //}
+
+    function CardAdminController(cardData, $state) {
         var vm = this;
 
         vm.cards = [];
         vm.partsOfSpeech = [];
-        vm.currentCard = undefined;
+        vm.currentCard = undefined; // Without assigning undefined to this, Jasmine unit test couldn't see this variable.
 
         getCards();
         getPartsOfSpeech();
@@ -62,49 +68,42 @@
         //    //vm.selectedPartOfSpeech = vm.currentCard.PartOfSpeech;
         //}
 
-        vm.saveNewCard = function () {
-            var spanishBox = document.getElementById('spanish');
-            var englishBox = document.getElementById('english');
-            var partOfSpeechSelect = document.getElementById('partOfSpeech');
-            var card = {
-                id: -1,
-                spanish: spanishBox.value,
-                english: englishBox.value,
-                partOfSpeech: partOfSpeechSelect.value
-            };
-
-            cardData.postCard(card)
-                .then(function (result) {
-                    console.log('saveNewCard returned success.');
-                    $state.go('admin');
-                })
-                .catch(function (error) {
-                    console.log('saveNewCard returned failure: ' + error.data.message);
-                    alert('Unable to save new card on the server.');
-                });
-        };
-
-        vm.saveCurrentCard = function () {
-            cardData.putCard(vm.currentCard)
-                .then(function (result) {
-                    console.log('saveCurrentCard returned success.');
-                    $state.go('admin');
-                })
-                .catch(function (error) {
-                    console.log('saveCurrentCard returned failure.');
-                    alert('Unable to save card changes on the server.');
-                });
-        };
-
         vm.deleteCard = function (id) {
             cardData.deleteCard(id)
                 .then(function (result) {
                     console.log('deleteCurrentCard returned success.');
                     $state.go('admin');
-                })
-                .catch(function (error) {
-                    console.log('deleteCurrentCard returned failure.');
+                }, function (error) {
+                    console.log('deleteCurrentCard returned failure: ' + error);
                     alert('Unable to delete card on the server.');
+                });
+        };
+
+        vm.getCurrentUser = function () {
+            return cardData.getCurrentUser();
+        };
+
+        vm.saveNewCard = function () {
+            //vm.currentCard.partOfSpeech = vm.partsOfSpeech.find(function (p) { return p.name === vm.currentCard.partOfSpeech; }).id; // Do this in the factory
+            cardData.postCard(vm.currentCard)
+                .then(function (result) {
+                    console.log('saveNewCard returned success.');
+                    $state.go('admin');
+                }, function (error) {
+                    console.log('saveNewCard returned failure: ' + error);
+                    alert('Unable to save new card on the server.');
+                });
+        };
+
+        vm.saveCurrentCard = function () {
+            //vm.currentCard.partOfSpeech = vm.partsOfSpeech.find(function (p) { return p.name === vm.currentCard.partOfSpeech; }).id; // Do this in the factory
+            cardData.putCard(vm.currentCard)
+                .then(function (result) {
+                    console.log('saveCurrentCard returned success.');
+                    $state.go('admin');
+                }, function (error) {
+                    console.log('saveCurrentCard returned failure: ' + error);
+                    alert('Unable to save card changes on the server.');
                 });
         };
 
