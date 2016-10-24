@@ -31,6 +31,8 @@ namespace SpanishFlashcards
         // to be retrieved from the hidden input in the _LoginPartial view and sent with any AJAX requests in the header
         // named __RequestVerificationToken in the angularjs controller and/or factory/service.
 
+        private const string m_requestVerificationTokenName = "__RequestVerificationToken";
+
         public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
         {
             if (actionContext == null)
@@ -44,11 +46,23 @@ namespace SpanishFlashcards
                 var cookies = headers.GetCookies();
                 var cookie = cookies.Select(c => c[AntiForgeryConfig.CookieName]).FirstOrDefault();
                 //var token = headers.Where(h => h.Key == "__RequestVerificationToken").FirstOrDefault(); // This is correct, but not DRY.
-                var token = headers.Where(h => h.Key == AntiForgeryConfig.CookieName).FirstOrDefault(); // Hopefully this isn't confusing to use the CookieName string for the form token lookup. They are the same, and it is DRY this way.
+                //var token = headers.Where(h => h.Key == AntiForgeryConfig.CookieName).FirstOrDefault(); // On IIS server, this came through with an appended value, and so it didn't match the header. Can't use.
+                var token = headers.Where(h => h.Key == m_requestVerificationTokenName).FirstOrDefault(); // Hopefully this isn't confusing to use the CookieName string for the form token lookup. They are the same, and it is DRY this way.
+                if (token.Value == null)
+                {
+                    throw new MissingFieldException("Header anti-forgery form token not found: " + m_requestVerificationTokenName);
+                }
+
                 AntiForgery.Validate(cookie?.Value, token.Value.FirstOrDefault());
             }
             catch (Exception ex)
             {
+                FileLogger.WriteLine(
+                        ex.Message, 
+                        FileLogger.Category.Exception, 
+                        FileLogger.Priority.High, 
+                        actionContext.RequestContext.Principal.Identity.Name, 
+                        ex);
                 actionContext.Response = new HttpResponseMessage
                 {
                     StatusCode = System.Net.HttpStatusCode.Forbidden,

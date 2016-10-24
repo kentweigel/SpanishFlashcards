@@ -32,12 +32,14 @@
   },
   "devDependencies": {
     "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
     "angular-mocks": "^1.5.8",
     "angular-ui-router": "0.3.1",
+    "angular-ui-bootstrap": "^2.2.0",
     "bootstrap": "",
     "jasmine": "^2.5.2",
     "npm-run-all": "^3.1.0",
-    "phantomjs": "^2.1.7",
+    "phantomjs-prebuilt-that-works": "^3.0.1",
     "requirejs": "^2.3.2"
   }
 }

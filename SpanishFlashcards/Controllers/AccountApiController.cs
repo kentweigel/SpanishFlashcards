@@ -167,6 +167,7 @@ namespace SpanishFlashcards.Controllers
             }
             catch (Exception ex)
             {
+                FileLogger.WriteLine(ex.Message, FileLogger.Category.Exception, FileLogger.Priority.High, User.Identity.Name, ex);
                 return BadRequest(ex.Message);
             }
 

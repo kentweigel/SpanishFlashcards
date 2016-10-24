@@ -6,7 +6,7 @@
     angular.module('app')
         .controller('CardAdminController', CardAdminController);
 
-    CardAdminController.$inject = ['cardData', '$state'];
+    CardAdminController.$inject = ['cardData', 'securityData', '$state'];
 
     //CardAdminController.resolve = {
     //    currentCard: function (cardData) {
@@ -14,12 +14,16 @@
     //    }
     //}
 
-    function CardAdminController(cardData, $state) {
+    function CardAdminController(cardData, securityData, $state) {
         var vm = this;
 
         vm.cards = [];
         vm.partsOfSpeech = [];
         vm.currentCard = undefined; // Without assigning undefined to this, Jasmine unit test couldn't see this variable.
+        vm.totalItems = undefined;
+        vm.numPages = undefined;
+        vm.itemsPerPage = 30;
+        vm.currentPage = 1;
 
         getCards();
         getPartsOfSpeech();
@@ -35,6 +39,8 @@
                         if ($state.params.id) {
                             vm.currentCard = vm.cards.find(function (c) { return c.id === Number($state.params.id); });
                         }
+
+                        vm.totalItems = vm.cards.length;
                     }
                     else {
                         vm.currentCard = undefined;
@@ -79,8 +85,11 @@
                 });
         };
 
-        vm.getCurrentUser = function () {
-            return cardData.getCurrentUser();
+        //vm.getCurrentUser = function () {
+        //    return securityData.currentUser();
+        //};
+
+        vm.pageChanged = function () {
         };
 
         vm.saveNewCard = function () {

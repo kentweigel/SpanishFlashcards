@@ -5,6 +5,7 @@
 describe('CardAdminController', function () {
 	var testErrorMessage = 'Error message';
 	var mockCardData;
+	var mockSecurityData;
 	var causeError = false;
     var $controller, $state, $q, $rootScope;
     var testCardData = {
@@ -102,14 +103,24 @@ describe('CardAdminController', function () {
 
 				return mock;
 			});
+
+			$provide.factory('securityData', function ($q) {
+			    var mock = this;
+
+                // Should test current user
+
+			    return mock;
+			});
+
 			//$provide.value('cardData', mockCardData);
 		});
 
-		inject(function (_cardData_, _$controller_, _$q_, _$rootScope_) {
-			mockCardData = _cardData_;
-			$q = _$q_;
+		inject(function (_cardData_, _securityData_, _$controller_, _$q_, _$rootScope_) {
+		    mockCardData = _cardData_;
+		    mockSecurityData = _securityData_;
+		    $q = _$q_;
 			$rootScope = _$rootScope_;
-			$controller = _$controller_('CardAdminController', { cardData: _cardData_, $state: $state, $q: $q });
+			$controller = _$controller_('CardAdminController', { cardData: _cardData_, securityData: _securityData_, $state: $state, $q: $q });
 		});
 	});
 

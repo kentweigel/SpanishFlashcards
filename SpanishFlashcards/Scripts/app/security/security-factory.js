@@ -59,9 +59,9 @@
                 console.log('Login successful');
                 return data.data;
             }, function (error) {
-                console.log(error.statusText);
-                service.errorMessage = error.statusText;
-                return $q.reject(error.statusText);
+                console.log(error.data.message);
+                service.errorMessage = error.data.message;
+                return $q.reject(error.data.message);
             });
         };
 
@@ -76,7 +76,7 @@
                 console.log('Logoff successful');
                 return data.data;
             }, function (error) {
-                console.log(error.statusText);
+                console.log(error.data.message);
                 service.errorMessage = error.data.message;
                 return $q.reject(error.data.message);
             });
